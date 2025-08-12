@@ -1,49 +1,239 @@
-<!DOCTYPE html>
-<html lang="ko">
+<!doctype html>
+<html lang="ko" data-theme="">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>내 홈페이지</title>
+  <title>내 포트폴리오</title>
+  <meta name="color-scheme" content="light dark" />
   <style>
+    /* ========== Design Tokens ========== */
     :root{
-      --bg: #fafbff; --card:#fff; --text:#0e1116; --muted:#5b6472;
-      --primary:#536dfe; --radius: 16px; --maxw: 900px;
+      --bg: #0b0d12;             /* page bg (dark) */
+      --bg-accent:#0e1322;       /* darker layer */
+      --text:#e9edf1;            /* body text */
+      --muted:#a7b0bf;
+      --primary:#7c96ff;         /* accent */
+      --ring: rgba(124,150,255,.35);
+      --glass: rgba(255,255,255,.06);
+      --glass-border: rgba(255,255,255,.18);
+      --card-radius: 18px;
+      --shadow-lg: 0 10px 40px rgba(0,0,0,.35);
+      --maxw: 1100px;
+      --space: clamp(16px, 2vw, 24px);
     }
-    *{box-sizing:border-box; margin:0; padding:0;}
-    body{font-family:sans-serif; background:var(--bg); color:var(--text); line-height:1.6;}
-    header, footer{padding:20px; text-align:center;}
-    main{max-width:var(--maxw); margin:0 auto; padding:20px;}
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f7f9ff; --bg-accent:#ecf1ff;
+        --text:#0e1116; --muted:#616b79;
+        --primary:#536dfe; --ring: rgba(83,109,254,.35);
+        --glass: rgba(255,255,255,.55);
+        --glass-border: rgba(0, 24, 168, .10);
+        --shadow-lg: 0 10px 30px rgba(17,40,120,.15);
+      }
+    }
+    /* theme toggle (explicit data-theme wins) */
+    html[data-theme="light"]{
+      --bg:#f7f9ff; --bg-accent:#ecf1ff; --text:#0e1116; --muted:#616b79;
+      --primary:#536dfe; --ring: rgba(83,109,254,.35);
+      --glass: rgba(255,255,255,.55); --glass-border: rgba(0,24,168,.10);
+      --shadow-lg: 0 10px 30px rgba(17,40,120,.15);
+    }
+    html[data-theme="dark"]{
+      --bg:#0b0d12; --bg-accent:#0e1322; --text:#e9edf1; --muted:#a7b0bf;
+      --primary:#7c96ff; --ring: rgba(124,150,255,.35);
+      --glass: rgba(255,255,255,.06); --glass-border: rgba(255,255,255,.18);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,.35);
+    }
+
+    /* ========== Base ========== */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
+      color:var(--text); background:var(--bg); line-height:1.65; -webkit-font-smoothing:antialiased;
+    }
+    a{color:var(--primary); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--maxw); margin:0 auto; padding: calc(var(--space) * 2) var(--space); position:relative; z-index:1;}
+
+    /* ========== Liquid Background (SVG + blur) ========== */
+    .liquid-bg{
+      position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;
+      filter: blur(32px) saturate(120%);
+      opacity:.8;
+    }
+    .blob{position:absolute; width:50vmax; height:50vmax; border-radius:50%;
+      background: radial-gradient(closest-side, rgba(124,150,255,.9), transparent 65%);
+      animation: float 18s ease-in-out infinite;
+      mix-blend-mode: screen;
+    }
+    .blob.b2{background: radial-gradient(closest-side, rgba(33,212,180,.9), transparent 65%); animation-duration: 22s;}
+    .blob.b3{background: radial-gradient(closest-side, rgba(255,105,180,.75), transparent 65%); animation-duration: 26s;}
+    @keyframes float{
+      0%{transform: translate(-10%, -10%)}
+      33%{transform: translate(60%, -20%)}
+      66%{transform: translate(0%, 40%)}
+      100%{transform: translate(-10%, -10%)}
+    }
+
+    /* ========== Header / Nav ========== */
+    header{padding-top: clamp(36px, 6vw, 72px); text-align:center;}
+    .title{
+      font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: .3px;
+      margin: 0 0 10px;
+    }
+    .subtitle{color:var(--muted); max-width:800px; margin: 0 auto 18px;}
+    .actions{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px;}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; font-weight:600;
+      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0));
+      border:1px solid var(--glass-border); backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-lg); color:var(--text);
+      transition: transform .15s ease, box-shadow .15s ease, background .2s ease;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn:focus-visible{outline: 3px solid var(--ring); outline-offset: 2px}
+    .btn.primary{background: linear-gradient(180deg, rgba(124,150,255,.25), rgba(124,150,255,.08));}
+
+    .theme-toggle{
+      position: fixed; right: 14px; bottom: 14px; z-index: 3;
+      background: var(--glass); border:1px solid var(--glass-border); backdrop-filter: blur(10px);
+      border-radius: 999px; padding: 10px 12px; box-shadow: var(--shadow-lg); cursor: pointer; user-select: none;
+    }
+
+    /* ========== Glass Cards Grid ========== */
+    .grid{
+      display:grid; gap: clamp(14px, 2vw, 22px);
+      grid-template-columns: repeat(1, minmax(0,1fr));
+      margin-top: clamp(20px, 3vw, 36px);
+    }
+    @media (min-width: 720px){
+      .grid{grid-template-columns: repeat(2, minmax(0,1fr));}
+    }
+    @media (min-width: 1040px){
+      .grid{grid-template-columns: repeat(3, minmax(0,1fr));}
+    }
     .card{
-      background:var(--card); border-radius:var(--radius); padding:20px;
-      box-shadow:0 4px 15px rgba(0,0,0,.08); margin-bottom:20px;
+      position:relative; overflow:hidden; border-radius: var(--card-radius);
+      background: var(--glass); border:1px solid var(--glass-border);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow-lg);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
     }
-    a{color:var(--primary); text-decoration:none;}
-    a:hover{text-decoration:underline;}
+    .card:hover{transform: translateY(-3px)}
+    .card:focus-within{outline: 3px solid var(--ring); outline-offset: 2px}
+    .card::before{ /* subtle liquid sheen */
+      content:""; position:absolute; inset:-50% -20%; transform: rotate(8deg);
+      background: radial-gradient(60% 60% at 50% 30%, rgba(255,255,255,.25), transparent 60%),
+                  linear-gradient( to bottom, rgba(255,255,255,.08), rgba(255,255,255,0));
+      mix-blend-mode: overlay; pointer-events:none;
+    }
+    .card-body{position:relative; padding: clamp(16px, 2.2vw, 22px);}
+    .card h3{margin:0 0 6px; font-size: clamp(18px, 2.2vw, 22px)}
+    .card p{margin:0 0 12px; color:var(--muted)}
+    .card .meta{display:flex; gap:10px; flex-wrap:wrap; align-items:center; font-size:.9em; color:var(--muted)}
+    .chip{
+      display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px;
+      background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.04));
+      border:1px solid var(--glass-border); backdrop-filter: blur(8px);
+    }
+
+    /* ========== Footer ========== */
+    footer{ text-align:center; color:var(--muted); padding: 40px 0; }
+
+    /* ========== Safe fallback for no backdrop-filter ========== */
+    @supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))){
+      .btn, .card, .theme-toggle{ background: rgba(255,255,255,.12); }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>안녕하세요 👋</h1>
-    <p>이곳은 제 GitHub Pages 메인 홈페이지입니다.</p>
-  </header>
+  <!-- Liquid “glass + blob” background -->
+  <div class="liquid-bg" aria-hidden="true">
+    <div class="blob b1" style="top:-10vmax; left:-10vmax;"></div>
+    <div class="blob b2" style="bottom:-10vmax; right:-5vmax;"></div>
+    <div class="blob b3" style="top:20vmax; left:35vmax;"></div>
+  </div>
 
-  <main>
-    <div class="card">
-      <h2>소개</h2>
-      <p>여기에 자기소개나 프로젝트 간단 설명을 적으세요.</p>
-    </div>
+  <button class="theme-toggle" id="themeBtn" title="테마 전환 (Light/Dark)">🌓</button>
 
-    <div class="card">
-      <h2>프로젝트</h2>
-      <ul>
-        <li><a href="https://username.github.io/project1/">프로젝트 1</a></li>
-        <li><a href="https://username.github.io/project2/">프로젝트 2</a></li>
-      </ul>
-    </div>
-  </main>
+  <div class="wrap">
+    <header>
+      <h1 class="title">안녕하세요, 제 포트폴리오입니다 👋</h1>
+      <p class="subtitle">데이터·딥러닝 프로젝트와 글을 정리합니다. 카드형 그리드, 다크모드, 리퀴드 글래스 효과가 적용되어 있어요.</p>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/username" target="_blank" rel="noopener">GitHub 보기</a>
+        <a class="btn" href="#projects">프로젝트로 이동</a>
+      </div>
+    </header>
 
-  <footer>
-    © 2025 내이름 · <a href="https://github.com/username">GitHub</a>
-  </footer>
+    <main id="projects" class="grid" aria-label="프로젝트 목록">
+      <!-- 카드 예시 1 -->
+      <article class="card">
+        <div class="card-body">
+          <h3><a href="https://username.github.io/project-one/" target="_blank" rel="noopener">Project One</a></h3>
+          <p>시계열 이상탐지(실시간) 데모. MDN/RMDN 기반 CDE 추정.</p>
+          <div class="meta">
+            <span class="chip">🔧 Python</span>
+            <span class="chip">⚡ 실시간</span>
+            <a class="chip" href="https://github.com/username/project-one" target="_blank" rel="noopener">Repo</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 카드 예시 2 -->
+      <article class="card">
+        <div class="card-body">
+          <h3><a href="https://username.github.io/project-two/" target="_blank" rel="noopener">Project Two</a></h3>
+          <p>연속시간 Transformer로 불규칙 시계열 예측. 논문/코드/데모 포함.</p>
+          <div class="meta">
+            <span class="chip">🧠 Deep Learning</span>
+            <span class="chip">⏱ Forecasting</span>
+            <a class="chip" href="https://github.com/username/project-two" target="_blank" rel="noopener">Repo</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 카드 예시 3 -->
+      <article class="card">
+        <div class="card-body">
+          <h3><a href="https://username.github.io/blog/" target="_blank" rel="noopener">Blog</a></h3>
+          <p>연구/리뷰/삽질 기록. SDE/확산모형/포인트 이상 탐지 메모들.</p>
+          <div class="meta">
+            <span class="chip">✍️ Notes</span>
+            <span class="chip">📚 Paper</span>
+            <a class="chip" href="https://github.com/username/blog" target="_blank" rel="noopener">Repo</a>
+          </div>
+        </div>
+      </article>
+      <!-- 카드 더 복제해서 쓰면 됩니다 -->
+    </main>
+
+    <footer>© 2025 Your Name · <a href="https://username.github.io">username.github.io</a></footer>
+  </div>
+
+  <script>
+    // ===== Light/Dark toggle with persistence =====
+    (function(){
+      const key = "theme";
+      const btn = document.getElementById("themeBtn");
+      const root = document.documentElement;
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      function applyTheme(v){
+        root.setAttribute("data-theme", v);
+        try{ localStorage.setItem(key, v); }catch(e){}
+      }
+      function currentTheme(){
+        const saved = localStorage.getItem(key);
+        if(saved === "light" || saved === "dark") return saved;
+        return prefersDark ? "dark" : "light";
+      }
+      applyTheme(currentTheme());
+      btn.addEventListener("click", ()=> applyTheme(
+        root.getAttribute("data-theme") === "dark" ? "light" : "dark"
+      ));
+    })();
+  </script>
 </body>
 </html>
