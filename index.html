@@ -7,60 +7,74 @@
   <meta name="description" content="감승수(SEUNGSU KAM)의 자기소개, 연구 프로젝트, 논문/발표, 경력 및 연락처" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #fdfdfd; /* very light */
+      --bg: #f0faff;
       --fg: #0f172a;
-      --muted: #64748b;
-      --primary: #3b82f6; /* blue-500 */
-      --card: rgba(255,255,255,0.75);
-      --border: rgba(148,163,184,0.3);
+      --muted: #475569;
+      --primary: #0ea5e9;
+      --card: rgba(255, 255, 255, 0.6);
+      --border: rgba(255, 255, 255, 0.4);
       --radius: 16px;
-      --shadow: 0 6px 20px rgba(0,0,0,0.08);
+      --shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
       --maxw: 1100px;
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #f5f5f5;
-        --fg: #1e293b;
-        --muted: #475569;
-        --primary: #2563eb;
-        --card: rgba(255,255,255,0.85);
-        --border: rgba(148,163,184,0.3);
-        --shadow: 0 6px 20px rgba(0,0,0,0.1);
-      }
+
+    body {
+      margin: 0;
+      font-family: "Pretendard", sans-serif;
+      color: var(--fg);
+      background: linear-gradient(135deg, rgba(224, 242, 254, 0.8), rgba(255, 255, 255, 0.6)), url('https://www.transparenttextures.com/patterns/white-wall.png');
+      background-size: cover;
     }
-    body { margin: 0; background: var(--bg); color: var(--fg); font-family: "Pretendard", sans-serif; }
+
     .container { max-width: var(--maxw); margin: 0 auto; padding: 28px; }
-    header.site { position: sticky; top: 0; backdrop-filter: saturate(180%) blur(12px); background: var(--card); border-bottom: 1px solid var(--border); z-index: 20; }
-    .nav { display: flex; align-items: center; gap: 16px; padding: 12px 0; }
+
+    header.site {
+      position: sticky; top: 0;
+      backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(255, 255, 255, 0.4);
+      border-bottom: 1px solid var(--border);
+      z-index: 20;
+    }
+    .nav { display: flex; align-items: center; padding: 12px 0; gap: 16px; }
     .nav a.brand { font-weight: 800; color: var(--fg); text-decoration: none; }
     .nav .links { margin-left: auto; display: flex; gap: 10px; }
-    .nav .links a { color: var(--muted); font-weight: 600; padding: 8px 12px; border-radius: 12px; transition: background 200ms ease; }
-    .nav .links a:hover { background: rgba(0,0,0,0.04); color: var(--fg); }
+    .nav .links a { color: var(--muted); font-weight: 600; padding: 8px 12px; border-radius: 12px; transition: background 0.3s ease; }
+    .nav .links a:hover { background: rgba(255, 255, 255, 0.3); }
 
-    .hero { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 42px 0; }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); max-width: 800px; }
-    .profile-box { display: flex; align-items: center; gap: 20px; }
-    .profile-box img { width: 96px; height: 96px; border-radius: 18px; border: 1px solid var(--border); }
+    .hero { display: flex; flex-direction: column; align-items: center; padding: 42px 0; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(25px) saturate(180%);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(31, 38, 135, 0.25); }
+
+    .profile-box { display: flex; align-items: center; gap: 20px; max-width: 800px; }
+    .profile-box img { width: 96px; height: 96px; border-radius: 18px; border: 2px solid rgba(255,255,255,0.5); }
     .meta { color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
 
     section { padding: 28px 0; }
     .h2 { font-size: 1.45rem; font-weight: 800; margin-bottom: 14px; }
+
     .timeline { position: relative; padding-left: 28px; }
     .timeline::before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--primary); }
     .timeline-item { position: relative; margin: 14px 0; }
     .timeline-item::before { content: ""; position: absolute; left: -2px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--primary); }
-    .timeline-item strong { display: inline-block; margin-bottom: 2px; }
 
     .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
     .col-6 { grid-column: span 6; }
-    .pub { border: 1px solid var(--border); border-radius: 14px; padding: 12px; margin-bottom: 12px; background: var(--card); }
+    .pub { border: 1px solid var(--border); border-radius: 14px; padding: 12px; margin-bottom: 12px; background: var(--card); backdrop-filter: blur(20px); }
     .pub .title { font-weight: 700; }
     .pub .meta { font-size: 0.92rem; color: var(--muted); }
 
-    footer { border-top: 1px solid var(--border); color: var(--muted); padding: 28px 0 60px; font-size: 0.95rem; }
+    footer { border-top: 1px solid var(--border); color: var(--muted); padding: 28px 0 60px; font-size: 0.95rem; backdrop-filter: blur(10px); background: rgba(255,255,255,0.3); }
   </style>
 </head>
 <body>
@@ -149,6 +163,5 @@
   <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
-
 
 
