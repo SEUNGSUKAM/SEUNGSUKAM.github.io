@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko" data-theme="">
+<html lang="ko" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -7,22 +7,15 @@
   <meta name="description" content="UNIST 석박통합 7학기 | 시계열 · 이상탐지 · 연속시간 모델링 · 종단 생존분석" />
   <meta name="color-scheme" content="light dark" />
   <style>
-    /* ===================== Design Tokens ===================== */
     :root{
-      --bg:#0b0d12; --bg-accent:#0e1322; --text:#e9edf1; --muted:#a7b0bf;
-      --primary:#7c96ff; --ring: rgba(124,150,255,.35);
-      --glass: rgba(255,255,255,.06); --glass-border: rgba(255,255,255,.18);
-      --card-radius:18px; --shadow-lg:0 10px 40px rgba(0,0,0,.35);
+      --bg:#f7f9ff; --bg-accent:#ecf1ff; --text:#0e1116; --muted:#616b79;
+      --primary:#536dfe; --ring: rgba(83,109,254,.35);
+      --glass: rgba(255,255,255,.55); --glass-border: rgba(0,24,168,.10);
+      --card-radius:18px; --shadow-lg:0 10px 30px rgba(17,40,120,.15);
       --maxw:1200px; --space:clamp(16px,2vw,24px);
       --space-lg: clamp(36px, 6vw, 80px);
     }
-    @media (prefers-color-scheme: light){
-      :root{--bg:#f7f9ff; --bg-accent:#ecf1ff; --text:#0e1116; --muted:#616b79; --primary:#536dfe; --ring:rgba(83,109,254,.35); --glass:rgba(255,255,255,.55); --glass-border:rgba(0,24,168,.10); --shadow-lg:0 10px 30px rgba(17,40,120,.15)}
-    }
-    html[data-theme="light"]{--bg:#f7f9ff; --bg-accent:#ecf1ff; --text:#0e1116; --muted:#616b79; --primary:#536dfe; --ring:rgba(83,109,254,.35); --glass:rgba(255,255,255,.55); --glass-border:rgba(0,24,168,.10); --shadow-lg:0 10px 30px rgba(17,40,120,.15)}
-    html[data-theme="dark"]{--bg:#0b0d12; --bg-accent:#0e1322; --text:#e9edf1; --muted:#a7b0bf; --primary:#7c96ff; --ring:rgba(124,150,255,.35); --glass:rgba(255,255,255,.06); --glass-border:rgba(255,255,255,.18); --shadow-lg:0 10px 40px rgba(0,0,0,.35)}
 
-    /* Base */
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0; font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif; color:var(--text); background:var(--bg); line-height:1.65}
@@ -30,7 +23,6 @@
     a:hover{text-decoration:underline}
     .wrap{max-width:var(--maxw); margin:0 auto; padding: calc(var(--space) * 2) var(--space); position:relative; z-index:1}
 
-    /* Liquid background */
     .liquid-bg{position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; filter: blur(32px) saturate(120%); opacity:.8}
     .blob{position:absolute; width:50vmax; height:50vmax; border-radius:50%; background: radial-gradient(closest-side, rgba(124,150,255,.9), transparent 65%); animation: float 18s ease-in-out infinite; mix-blend-mode: screen}
     .blob.b2{background: radial-gradient(closest-side, rgba(33,212,180,.9), transparent 65%); animation-duration: 22s}
@@ -43,12 +35,10 @@
     .actions{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px}
     .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; font-weight:600; background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,0)); border:1px solid var(--glass-border); backdrop-filter: blur(12px); box-shadow:var(--shadow-lg); color:var(--text); transition:transform .15s ease, box-shadow .15s ease, background .2s ease}
     .btn:hover{transform:translateY(-1px)}
-    .btn:focus-visible{outline:3px solid var(--ring); outline-offset:2px}
     .btn.primary{background:linear-gradient(180deg, rgba(124,150,255,.25), rgba(124,150,255,.08))}
 
     .theme-toggle{position:fixed; right:14px; bottom:14px; z-index:3; background:var(--glass); border:1px solid var(--glass-border); backdrop-filter: blur(10px); border-radius:999px; padding:10px 12px; box-shadow:var(--shadow-lg); cursor:pointer; user-select:none}
 
-    /* Profile card */
     .profile{display:grid; grid-template-columns:96px 1fr; gap:16px; align-items:center; margin-top:24px; padding:16px; border-radius:var(--card-radius); background:var(--glass); border:1px solid var(--glass-border); box-shadow:var(--shadow-lg); backdrop-filter: blur(14px)}
     .avatar{width:96px; height:96px; border-radius:18px; border:2px solid var(--glass-border); object-fit:cover; background:#ccc}
     .profile h3{margin:0 0 6px}
@@ -64,8 +54,6 @@
 
     .card{position:relative; overflow:hidden; border-radius:var(--card-radius); background:var(--glass); border:1px solid var(--glass-border); backdrop-filter: blur(14px); box-shadow:var(--shadow-lg); transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
     .card:hover{transform: translateY(-3px)}
-    .card:focus-within{outline:3px solid var(--ring); outline-offset:2px}
-    .card::before{content:""; position:absolute; inset:-50% -20%; transform:rotate(8deg); background: radial-gradient(60% 60% at 50% 30%, rgba(255,255,255,.25), transparent 60%), linear-gradient(to bottom, rgba(255,255,255,.08), rgba(255,255,255,0)); mix-blend-mode: overlay; pointer-events:none}
     .card-body{position:relative; padding:clamp(16px,2.2vw,22px)}
     .card h3{margin:0 0 6px; font-size:clamp(18px,2.2vw,22px)}
     .card p{margin:0 0 12px; color:var(--muted)}
@@ -74,117 +62,93 @@
 
     ul.publist{list-style:none; padding:0; margin:8px 0 0}
     ul.publist li{background:var(--glass); border:1px solid var(--glass-border); backdrop-filter: blur(8px); border-radius:12px; padding:12px 14px; margin:10px 0}
-    ul.publist a{word-break:break-word}
 
     footer{text-align:center; color:var(--muted); padding:40px 0}
-    @supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))){ .btn,.card,.theme-toggle,ul.publist li,.profile{ background: rgba(255,255,255,.12) } }
-
-    /* cursor fx */
     .cursor { position: fixed; inset: 0 auto auto 0; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--primary); pointer-events: none; z-index: 10; translate: -50% -50%; mix-blend-mode: screen; backdrop-filter: blur(4px)}
     .cursor.is-link{ width: 34px; height: 34px; background: rgba(124,150,255,.15) }
-    .click-ring{ position: fixed; width: 6px; height: 6px; border-radius: 999px; background: var(--primary); pointer-events: none; z-index: 9; opacity: .6 }
   </style>
 </head>
 <body>
-  <!-- Liquid glass background -->
   <div class="liquid-bg" aria-hidden="true">
     <div class="blob b1" style="top:-10vmax; left:-10vmax"></div>
     <div class="blob b2" style="bottom:-10vmax; right:-5vmax"></div>
     <div class="blob b3" style="top:20vmax; left:35vmax"></div>
   </div>
 
-  <button class="theme-toggle" id="themeBtn" title="테마 전환 (Light/Dark)">🌓</button>
+  <button class="theme-toggle" id="themeBtn">🌓</button>
 
   <div class="wrap">
     <header>
       <h1 class="title">안녕하세요, 감승수(SEUNGSU KAM) 👋</h1>
-      <p class="subtitle">UNIST 석박통합 <strong>7학기</strong>. ⏱ 시계열 · 🔎 이상탐지 · ⌛ 연속시간 모델링 · 📊 종단 생존분석을 연구합니다.</p>
+      <p class="subtitle">UNIST 석박통합 <strong>7학기</strong>. ⏱ 시계열 · 🔎 이상탐지 · ⌛ 연속시간 모델링 · 📊 종단 생존분석 연구</p>
       <div class="actions">
         <a class="btn primary" href="mailto:lewki83@unist.ac.kr">📧 Email</a>
-        <a class="btn" href="https://github.com/username" target="_blank" rel="noopener">💻 GitHub</a>
-        <a class="btn" href="https://scholar.google.com" target="_blank" rel="noopener">🎓 Google Scholar</a>
+        <a class="btn" href="https://github.com/username" target="_blank">💻 GitHub</a>
+        <a class="btn" href="https://scholar.google.com" target="_blank">🎓 Scholar</a>
       </div>
-      <!-- Profile card with photo space -->
-      <div class="profile" id="profileCard">
-        <img class="avatar" src="https://placehold.co/192x192/png" alt="감승수 프로필 사진" />
+      <div class="profile">
+        <img class="avatar" src="https://placehold.co/192x192/png" alt="감승수 프로필" />
         <div>
           <h3>감승수 · SEUNGSU KAM</h3>
-          <p class="meta">UNIST | AI대학원 · ⏱ Time Series · 🔎 Anomaly Detection · ⌛ Continuous-time Modeling · 📊 Survival Analysis</p>
-          <p class="meta">UNIST 통합과정 7학기생. Physics-informed CDE, 불규칙 샘플링 시계열, Multi-risk 생존분석에 집중하고 있습니다.</p>
+          <p class="meta">UNIST AI대학원 · Time Series ⏱ · Anomaly Detection 🔎 · Continuous-time Modeling ⌛ · Survival Analysis 📊</p>
         </div>
       </div>
     </header>
 
-    <!-- Experience -->
     <section class="section" id="career">
       <h2>💼 Experience</h2>
-      <p class="lead">학력 및 활동</p>
       <ul class="publist">
-        <li><strong>Ajou University</strong> — B.S. in Industrial Engineering (2015–2022)</li>
-        <li><strong>UNIST</strong> — Integrated M.S./Ph.D. in Industrial Engineering (2022–Present)</li>
+        <li><strong>Ajou University</strong> — B.S. Industrial Engineering (2015–2022)</li>
+        <li><strong>UNIST</strong> — Integrated M.S./Ph.D. Industrial Engineering (2022–Present)</li>
       </ul>
     </section>
 
-    <!-- Projects -->
-    <section class="section" id="projects" aria-label="프로젝트 목록">
+    <section class="section" id="projects">
       <h2>🛠 프로젝트</h2>
       <div class="grid">
-        <article class="card motion-card">
-          <div class="card-body">
-            <h3>🌌 실시간 상태 이상 퀘이사 탐지</h3>
-            <p>Physics Informed · Conditional Density Estimation · Irregular Time Series</p>
-            <div class="meta">
-              <span class="chip">CDE</span>
-              <span class="chip">Physics-informed</span>
-              <span class="chip">Quasar</span>
-            </div>
-          </div>
-        </article>
-        <article class="card motion-card">
-          <div class="card-body">
-            <h3>🔭 불규칙 천체 시계열 이상치 탐지</h3>
-            <p>Neural Differential Equation · Physics Informed · Anomaly Detection</p>
-            <div class="meta">
-              <span class="chip">Neural DE</span>
-              <span class="chip">Anomaly Detection</span>
-              <span class="chip">Irregular TS</span>
-            </div>
-          </div>
-        </article>
-        <article class="card motion-card">
-          <div class="card-body">
-            <h3>📊 Multi-risk 생존분석 (종단 데이터)</h3>
-            <p>Survival Analysis · Longitudinal Data · Multi-risk</p>
-            <div class="meta">
-              <span class="chip">Survival</span>
-              <span class="chip">Longitudinal</span>
-              <span class="chip">Multi-risk</span>
-            </div>
-          </div>
-        </article>
-        <article class="card motion-card">
-          <div class="card-body">
-            <h3>💊 갑상선 항진증 환자 복용량 추천</h3>
-            <p>Dose Recommendation · Healthcare · Hyperthyroidism</p>
-            <div class="meta">
-              <span class="chip">Healthcare</span>
-              <span class="chip">Recommendation</span>
-              <span class="chip">Hyperthyroidism</span>
-            </div>
-          </div>
-        </article>
+        <article class="card"><div class="card-body"><h3>🌌 실시간 퀘이사 이상 탐지</h3><p>Physics Informed · CDE · Irregular Time Series</p></div></article>
+        <article class="card"><div class="card-body"><h3>🔭 불규칙 천체 시계열 이상치 탐지</h3><p>Neural DE · Anomaly Detection</p></div></article>
+        <article class="card"><div class="card-body"><h3>📊 Multi-risk 생존분석</h3><p>Survival · Longitudinal Data</p></div></article>
+        <article class="card"><div class="card-body"><h3>💊 갑상선 항진증 환자 복용량 추천</h3><p>Healthcare · Recommendation</p></div></article>
       </div>
     </section>
 
-    <!-- Publications -->
     <section class="section" id="papers">
       <h2>📑 논문 (Papers)</h2>
       <ul class="publist">
-        <li><strong>Comprehensive review of neural differential equations for time series analysis</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. · arXiv (2025). <a href="https://arxiv.org/abs/2502.09885" target="_blank">PDF</a></li>
-        <li><strong>Addressing Spatial Gaps in XCO2 Monitoring: A Machine Learning Approach for South Korea</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; et al. · KIIE (2024). <a href="https://scholarworks.unist.ac.kr/handle/201301/86014" target="_blank">Record</a></li>
-        <li><strong>Assessing User Retention of Upgradable Home Appliances: Survival Analysis</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; et al. · KIIE (2024). <a href="https://sch
+        <li>2025 — <strong>Comprehensive review of neural differential equations for time series analysis</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. — <a href="https://arxiv.org/abs/2502.09885">arXiv</a></li>
+        <li>2024 — <strong>Addressing Spatial Gaps in XCO2 Monitoring</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://scholarworks.unist.ac.kr/handle/201301/86014">Record</a></li>
+        <li>2024 — <strong>Assessing User Retention of Upgradable Home Appliances</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://scholarworks.unist.ac.kr/handle/201301/82924">Record</a></li>
+        <li>2023 — <strong>Optimal and Personalized Dose Determination...</strong> — <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11609748">DBpia</a></li>
+        <li>2023 — <strong>Personalized Initial Dosage Recommender...</strong> — <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11800944">DBpia</a></li>
+      </ul>
+    </section>
 
+    <section class="section" id="talks">
+      <h2>🎤 발표 (Talks)</h2>
+      <ul class="publist">
+        <li>2024 — <strong>Neural Langevin-type SDEs for Astronomical TS Classification</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. — ICLR Workshop</li>
+        <li>2024 — <strong>Enhancing Astronomical TS Classification with Neural SDEs</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. — AAAI Workshop — <a href="https://scholarworks.unist.ac.kr/handle/201301/81822">Record</a></li>
+        <li>2023 — <strong>Real-Time Change Point Detection with Deep Generative Model in AGNs</strong> — <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11472774">DBpia</a></li>
+        <li>2023 — <strong>Real-Time Detection of Changing-State AGNs</strong> — <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://scholarworks.unist.ac.kr/handle/201301/74710">Record</a></li>
+      </ul>
+    </section>
 
+    <section class="section" id="ta">
+      <h2>🧑‍🏫 조교 활동</h2>
+      <ul class="publist">
+        <li>2025 Spring — Teaching Assistant, Time Series Analysis</li>
+        <li>2024 Fall — Teaching Assistant, Machine Learning</li>
+      </ul>
+    </section>
 
+    <footer>© <span id="y"></span> SEUNGSU KAM</footer>
+  </div>
 
+  <div class="cursor" id="cursor"></div>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
 
