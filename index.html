@@ -79,7 +79,7 @@
 
   <div class="wrap">
     <header>
-      <h1 class="title">안녕하세요, 감승수(SEUNGSU KAM) 👋</h1>
+      <h1 class="title"> 감승수(SEUNGSU KAM) 👋</h1>
       <p class="subtitle">UNIST 석박통합 <strong>7학기</strong>. ⏱ 시계열 · 🔎 이상탐지 · ⌛ 연속시간 모델링 · 📊 종단 생존분석 연구</p>
       <div class="actions">
         <a class="btn primary" href="mailto:lewki83@unist.ac.kr">📧 Email</a>
@@ -148,7 +148,16 @@
   <div class="cursor" id="cursor"></div>
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
+    (function(){
+      const key = "theme"; const btn = document.getElementById("themeBtn"); const root = document.documentElement;
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      function applyTheme(v){ root.setAttribute("data-theme", v); try{ localStorage.setItem(key, v); }catch(e){} }
+      function currentTheme(){ const saved = localStorage.getItem(key); if(saved === "light" || saved === "dark") return saved; return prefersDark ? "dark" : "light" }
+      applyTheme(currentTheme());
+      btn.addEventListener("click", ()=> applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark"));
+    })();
   </script>
 </body>
 </html>
+
 
