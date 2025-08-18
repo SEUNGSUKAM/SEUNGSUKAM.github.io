@@ -1,188 +1,244 @@
-<!DOCTYPE html>
-<html lang="ko">
+<!doctype html>
+<html lang="ko" data-theme="">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>감승수 — 연구 포트폴리오</title>
-  <meta name="description" content="감승수(SEUNGSU KAM)의 자기소개, 연구 프로젝트, 논문/발표, 경력 및 연락처" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>감승수 | UNIST 석박통합 7학기 포트폴리오</title>
+  <meta name="description" content="UNIST 석박통합 7학기 | 시계열 · 이상탐지 · 연속시간 모델링 · 종단 생존분석" />
+  <meta name="color-scheme" content="light dark" />
   <style>
     /* ===================== Design Tokens ===================== */
     :root{
-      --bg: #0b0d12; --bg-accent:#0e1322; --text:#e9edf1; --muted:#a7b0bf;
-      --primary:#7c96ff; --ring: rgba(124,150,255,.35);
-      --glass: rgba(255,255,255,.06); --glass-border: rgba(255,255,255,.18);
-      --card-radius: 18px; --shadow-lg: 0 10px 40px rgba(0,0,0,.35);
-      --maxw: 1200px; --space: clamp(16px, 2vw, 24px);
-      --space-lg: clamp(36px, 6vw, 80px);
-      --container-pad: calc(var(--space) * 2) var(--space);
-    }
-    @media (prefers-color-scheme: light){
-      :root{
-        --bg:#f7f9ff; --bg-accent:#ecf1ff; --text:#0e1116; --muted:#616b79;
-        --primary:#536dfe; --ring: rgba(83,109,254,.35);
-        --glass: rgba(255,255,255,.55); --glass-border: rgba(0, 24, 168, .10);
-        --shadow-lg: 0 10px 30px rgba(17,40,120,.15);
-      }
-    }
-    html[data-theme="light"]{
-      --bg:#f7f9ff; --bg-accent:#ecf1ff; --text:#0e1116; --muted:#616b79;
-      --primary:#536dfe; --ring: rgba(83,109,254,.35);
-      --glass: rgba(255,255,255,.55); --glass-border: rgba(0,24,168,.10);
-      --shadow-lg: 0 10px 30px rgba(17,40,120,.15);
-    }
-    html[data-theme="dark"]{
       --bg:#0b0d12; --bg-accent:#0e1322; --text:#e9edf1; --muted:#a7b0bf;
       --primary:#7c96ff; --ring: rgba(124,150,255,.35);
       --glass: rgba(255,255,255,.06); --glass-border: rgba(255,255,255,.18);
-      --shadow-lg: 0 10px 40px rgba(0,0,0,.35);
+      --card-radius:18px; --shadow-lg:0 10px 40px rgba(0,0,0,.35);
+      --maxw:1200px; --space:clamp(16px,2vw,24px);
+      --space-lg: clamp(36px, 6vw, 80px);
     }
-
-    body {
-      margin: 0;
-      font-family: "Pretendard", sans-serif;
-      color: var(--text);
-      background: var(--bg);
+    @media (prefers-color-scheme: light){
+      :root{--bg:#f7f9ff; --bg-accent:#ecf1ff; --text:#0e1116; --muted:#616b79; --primary:#536dfe; --ring:rgba(83,109,254,.35); --glass:rgba(255,255,255,.55); --glass-border:rgba(0,24,168,.10); --shadow-lg:0 10px 30px rgba(17,40,120,.15)}
     }
+    html[data-theme="light"]{--bg:#f7f9ff; --bg-accent:#ecf1ff; --text:#0e1116; --muted:#616b79; --primary:#536dfe; --ring:rgba(83,109,254,.35); --glass:rgba(255,255,255,.55); --glass-border:rgba(0,24,168,.10); --shadow-lg:0 10px 30px rgba(17,40,120,.15)}
+    html[data-theme="dark"]{--bg:#0b0d12; --bg-accent:#0e1322; --text:#e9edf1; --muted:#a7b0bf; --primary:#7c96ff; --ring:rgba(124,150,255,.35); --glass:rgba(255,255,255,.06); --glass-border:rgba(255,255,255,.18); --shadow-lg:0 10px 40px rgba(0,0,0,.35)}
 
-    .container { max-width: var(--maxw); margin: 0 auto; padding: var(--container-pad); }
+    /* Base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif; color:var(--text); background:var(--bg); line-height:1.65}
+    a{color:var(--primary); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--maxw); margin:0 auto; padding: calc(var(--space) * 2) var(--space); position:relative; z-index:1}
 
-    header.site {
-      position: sticky; top: 0; backdrop-filter: blur(20px) saturate(180%);
-      background: var(--glass);
-      border-bottom: 1px solid var(--glass-border);
-      z-index: 20;
-    }
-    .nav { display: flex; align-items: center; gap: var(--space); }
-    .nav a.brand { font-weight: 800; color: var(--text); text-decoration: none; }
-    .nav .links { margin-left: auto; display: flex; gap: var(--space); }
-    .nav .links a { color: var(--muted); font-weight: 600; padding: 8px 12px; border-radius: 12px; transition: background 0.3s ease; }
-    .nav .links a:hover { background: var(--ring); color: var(--text); }
+    /* Liquid background */
+    .liquid-bg{position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; filter: blur(32px) saturate(120%); opacity:.8}
+    .blob{position:absolute; width:50vmax; height:50vmax; border-radius:50%; background: radial-gradient(closest-side, rgba(124,150,255,.9), transparent 65%); animation: float 18s ease-in-out infinite; mix-blend-mode: screen}
+    .blob.b2{background: radial-gradient(closest-side, rgba(33,212,180,.9), transparent 65%); animation-duration: 22s}
+    .blob.b3{background: radial-gradient(closest-side, rgba(255,105,180,.75), transparent 65%); animation-duration: 26s}
+    @keyframes float{0%{transform:translate(-10%,-10%)}33%{transform:translate(60%,-20%)}66%{transform:translate(0%,40%)}100%{transform:translate(-10%,-10%)}}
 
-    .hero { display: flex; flex-direction: column; align-items: center; padding: var(--space-lg) 0; }
-    .card {
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--card-radius);
-      padding: var(--space);
-      box-shadow: var(--shadow-lg);
-      backdrop-filter: blur(25px) saturate(180%);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+    header{padding-top: clamp(36px, 6vw, 72px); text-align:center}
+    .title{font-size:clamp(28px,4vw,44px); font-weight:800; letter-spacing:.3px; margin:0 0 10px}
+    .subtitle{color:var(--muted); max-width:820px; margin:0 auto 18px}
+    .actions{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px}
+    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; font-weight:600; background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,0)); border:1px solid var(--glass-border); backdrop-filter: blur(12px); box-shadow:var(--shadow-lg); color:var(--text); transition:transform .15s ease, box-shadow .15s ease, background .2s ease}
+    .btn:hover{transform:translateY(-1px)}
+    .btn:focus-visible{outline:3px solid var(--ring); outline-offset:2px}
+    .btn.primary{background:linear-gradient(180deg, rgba(124,150,255,.25), rgba(124,150,255,.08))}
 
-    .profile-box { display: flex; align-items: center; gap: var(--space); max-width: 800px; }
-    .profile-box img { width: 96px; height: 96px; border-radius: 18px; border: 2px solid var(--glass-border); }
-    .meta { color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
+    .theme-toggle{position:fixed; right:14px; bottom:14px; z-index:3; background:var(--glass); border:1px solid var(--glass-border); backdrop-filter: blur(10px); border-radius:999px; padding:10px 12px; box-shadow:var(--shadow-lg); cursor:pointer; user-select:none}
 
-    section { padding: var(--space-lg) 0; }
-    .h2 { font-size: 1.45rem; font-weight: 800; margin-bottom: var(--space); }
+    /* Profile card */
+    .profile{display:grid; grid-template-columns:96px 1fr; gap:16px; align-items:center; margin-top:24px; padding:16px; border-radius:var(--card-radius); background:var(--glass); border:1px solid var(--glass-border); box-shadow:var(--shadow-lg); backdrop-filter: blur(14px)}
+    .avatar{width:96px; height:96px; border-radius:18px; border:2px solid var(--glass-border); object-fit:cover; background:#ccc}
+    .profile h3{margin:0 0 6px}
+    .profile .meta{color:var(--muted)}
 
-    .timeline { position: relative; padding-left: 28px; }
-    .timeline::before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--primary); }
-    .timeline-item { position: relative; margin: var(--space) 0; }
-    .timeline-item::before { content: ""; position: absolute; left: -2px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--primary); }
+    .section{margin-top: clamp(26px, 4vw, 44px)}
+    .section h2{margin:0 0 10px; font-size: clamp(20px, 3vw, 28px)}
+    .lead{color:var(--muted); margin:0 0 4px}
 
-    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--space); }
-    .col-6 { grid-column: span 6; }
-    .pub { border: 1px solid var(--glass-border); border-radius: 14px; padding: var(--space); margin-bottom: var(--space); background: var(--glass); backdrop-filter: blur(20px); }
-    .pub .title { font-weight: 700; }
-    .pub .meta { font-size: 0.92rem; color: var(--muted); }
+    .grid{display:grid; gap:clamp(14px,2vw,22px); grid-template-columns:repeat(1,minmax(0,1fr)); margin-top: clamp(14px, 2.5vw, 22px)}
+    @media (min-width: 720px){ .grid{grid-template-columns: repeat(2, minmax(0,1fr))} }
+    @media (min-width: 1040px){ .grid{grid-template-columns: repeat(3, minmax(0,1fr))} }
 
-    footer { border-top: 1px solid var(--glass-border); color: var(--muted); padding: var(--space-lg) 0; font-size: 0.95rem; backdrop-filter: blur(10px); background: var(--glass); }
+    .card{position:relative; overflow:hidden; border-radius:var(--card-radius); background:var(--glass); border:1px solid var(--glass-border); backdrop-filter: blur(14px); box-shadow:var(--shadow-lg); transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
+    .card:hover{transform: translateY(-3px)}
+    .card:focus-within{outline:3px solid var(--ring); outline-offset:2px}
+    .card::before{content:""; position:absolute; inset:-50% -20%; transform:rotate(8deg); background: radial-gradient(60% 60% at 50% 30%, rgba(255,255,255,.25), transparent 60%), linear-gradient(to bottom, rgba(255,255,255,.08), rgba(255,255,255,0)); mix-blend-mode: overlay; pointer-events:none}
+    .card-body{position:relative; padding:clamp(16px,2.2vw,22px)}
+    .card h3{margin:0 0 6px; font-size:clamp(18px,2.2vw,22px)}
+    .card p{margin:0 0 12px; color:var(--muted)}
+    .meta{display:flex; gap:10px; flex-wrap:wrap; align-items:center; font-size:.9em; color:var(--muted)}
+    .chip{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.04)); border:1px solid var(--glass-border); backdrop-filter: blur(8px)}
 
-    /* Custom cursor */
-    .cursor { position: fixed; top: 0; left: 0; width: 28px; height: 28px; border: 2px solid var(--primary); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); transition: width .2s, height .2s; z-index: 50; backdrop-filter: blur(6px); background: rgba(14,165,233,0.1); }
-    .cursor.cursor--link { width: 42px; height: 42px; background: rgba(14,165,233,0.2); }
+    ul.publist{list-style:none; padding:0; margin:8px 0 0}
+    ul.publist li{background:var(--glass); border:1px solid var(--glass-border); backdrop-filter: blur(8px); border-radius:12px; padding:12px 14px; margin:10px 0}
+    ul.publist a{word-break:break-word}
+
+    footer{text-align:center; color:var(--muted); padding:40px 0}
+    @supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))){ .btn,.card,.theme-toggle,ul.publist li,.profile{ background: rgba(255,255,255,.12) } }
+
+    /* cursor fx */
+    .cursor { position: fixed; inset: 0 auto auto 0; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--primary); pointer-events: none; z-index: 10; translate: -50% -50%; mix-blend-mode: screen; backdrop-filter: blur(4px)}
+    .cursor.is-link{ width: 34px; height: 34px; background: rgba(124,150,255,.15) }
+    .click-ring{ position: fixed; width: 6px; height: 6px; border-radius: 999px; background: var(--primary); pointer-events: none; z-index: 9; opacity: .6 }
   </style>
 </head>
 <body>
-  <header class="site">
-    <div class="container nav">
-      <a class="brand" href="#top">감승수</a>
-      <nav class="links">
-        <a href="#about">소개</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">프로젝트</a>
-        <a href="#pubs">논문·발표</a>
-        <a href="#awards">수상</a>
-        <a href="#contact">연락처</a>
-      </nav>
-    </div>
-  </header>
+  <!-- Liquid glass background -->
+  <div class="liquid-bg" aria-hidden="true">
+    <div class="blob b1" style="top:-10vmax; left:-10vmax"></div>
+    <div class="blob b2" style="bottom:-10vmax; right:-5vmax"></div>
+    <div class="blob b3" style="top:20vmax; left:35vmax"></div>
+  </div>
 
-  <main id="main" class="container">
-    <section id="top" class="hero">
-      <div class="card profile-box">
-        <img src="https://placehold.co/96x96" alt="프로필 사진"/>
+  <button class="theme-toggle" id="themeBtn" title="테마 전환 (Light/Dark)">🌓</button>
+
+  <div class="wrap">
+    <header>
+      <h1 class="title">안녕하세요, 감승수(SEUNGSU KAM) 👋</h1>
+      <p class="subtitle">UNIST 석박통합 <strong>7학기</strong>. 시계열 · 이상탐지 · 연속시간 모델링 · 종단 생존분석을 연구합니다.</p>
+      <div class="actions">
+        <a class="btn primary" href="mailto:lewki83@unist.ac.kr">Email</a>
+        <a class="btn" href="아주대학교_감승수_CV.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+        <a class="btn" href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a>
+      </div>
+      <!-- Profile card with photo space -->
+      <div class="profile" id="profileCard">
+        <img class="avatar" src="https://placehold.co/192x192/png" alt="감승수 프로필 사진" />
         <div>
-          <strong>감승수 · SEUNGSU KAM</strong><br/>
-          <div class="meta">UNIST | AI대학원</div>
-          <div class="meta">UNIST 통합과정 7학기생. Physics-informed CDE, 불규칙 샘플링 시계열, Multi-risk 생존분석에 집중하고 있습니다.</div>
-          <div class="meta"><a href="mailto:lewki83@unist.ac.kr">lewki83@unist.ac.kr</a> · <a href="https://scholar.google.com" target="_blank">Google Scholar</a> · <a href="아주대학교_감승수_CV.pdf" target="_blank">CV</a></div>
+          <h3>감승수 · SEUNGSU KAM</h3>
+          <p class="meta">UNIST | AI대학원 · Time Series · Anomaly Detection · Continuous-time Modeling · Survival Analysis</p>
+          <p class="meta">UNIST 통합과정 7학기생. Physics-informed CDE, 불규칙 샘플링 시계열, Multi-risk 생존분석에 집중하고 있습니다.</p>
         </div>
       </div>
-    </section>
+    </header>
 
-    <section id="experience">
-      <h2 class="h2">Experience</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <strong>Ajou University — B.S. in Industrial Engineering</strong> — 2015 – 2022<br/>
-          <span>Focus on data analysis, AI, and optimization</span>
-        </div>
-        <div class="timeline-item">
-          <strong>UNIST — Integrated M.S./Ph.D. in Industrial Engineering</strong> — 2022 – Present<br/>
-          <span>Research in time-series anomaly detection, continuous-time modeling, and survival analysis</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <h2 class="h2">프로젝트</h2>
-      <div class="grid">
-        <div class="col-6 card">실시간 상태 이상 퀘이사 탐지</div>
-        <div class="col-6 card">불규칙 천체 시계열 이상치 탐지</div>
-        <div class="col-6 card">Multi-risk 생존분석</div>
-        <div class="col-6 card">갑상선 항진증 환자 복용량 추천</div>
-      </div>
-    </section>
-
-    <section id="pubs">
-      <h2 class="h2">논문 · 발표</h2>
-      <div class="pub">Comprehensive review of neural differential equations for time series analysis — 2025 — <a href="https://arxiv.org/abs/2502.09885">PDF</a></div>
-      <div class="pub">Neural Langevin-type SDEs for Astronomical time series Classification — ICLR 2024 Workshop</div>
-      <div class="pub">Real-Time Change Point Detection with Deep Generative Model in AGNs — 2023</div>
-      <div class="pub">Optimal and Personalized Dose Determination for Patients with Thyroid Hormone Disorders — 2023</div>
-      <div class="pub">Enhancing Astronomical time series Classification with Neural SDEs — AAAI 24 Workshop — <a href="https://scholarworks.unist.ac.kr/handle/201301/81822">Record</a> <a href="https://sites.google.com/vt.edu/kgml-bridge-aaai-24/#h.8bxu7wv3ha6t">Slides</a></div>
-      <div class="pub">Real-Time Detection of Changing-State AGNs — KIIE 2023 — <a href="https://scholarworks.unist.ac.kr/handle/201301/74710">Record</a></div>
-      <div class="pub">Addressing Spatial Gaps in XCO2 Monitoring — 2024 — <a href="https://scholarworks.unist.ac.kr/handle/201301/86014">Record</a></div>
-      <div class="pub">Assessing User Retention of Upgradable Home Appliances — 2024 — <a href="https://scholarworks.unist.ac.kr/handle/201301/82924">Record</a></div>
-    </section>
-
-    <section id="awards">
-      <h2 class="h2">수상 · 연구비</h2>
-      <ul>
-        <li>2025 — 우수논문상, 학회명</li>
-        <li>2024 — 연구장학금, 기관명</li>
+    <!-- Experience -->
+    <section class="section" id="career">
+      <h2>Experience</h2>
+      <p class="lead">학력 및 활동</p>
+      <ul class="publist">
+        <li><strong>Ajou University</strong> — B.S. in Industrial Engineering (2015–2022)</li>
+        <li><strong>UNIST</strong> — Integrated M.S./Ph.D. in Industrial Engineering (2022–Present)</li>
       </ul>
     </section>
 
-    <section id="contact">
-      <h2 class="h2">연락처</h2>
-      <p>이메일: <a href="mailto:lewki83@unist.ac.kr">lewki83@unist.ac.kr</a></p>
-      <p>학교: UNIST AI대학원</p>
-      <p>소셜: <a href="#">GitHub</a> · <a href="#">X</a> · <a href="#">LinkedIn</a></p>
+    <!-- Projects -->
+    <section class="section" id="projects" aria-label="프로젝트 목록">
+      <h2>프로젝트</h2>
+      <div class="grid">
+        <article class="card motion-card">
+          <div class="card-body">
+            <h3>실시간 상태 이상 퀘이사 탐지</h3>
+            <p>Physics Informed · Conditional Density Estimation · Irregular Time Series</p>
+            <div class="meta">
+              <span class="chip">CDE</span>
+              <span class="chip">Physics-informed</span>
+              <span class="chip">Quasar</span>
+            </div>
+          </div>
+        </article>
+        <article class="card motion-card">
+          <div class="card-body">
+            <h3>불규칙 천체 시계열 이상치 탐지</h3>
+            <p>Neural Differential Equation · Physics Informed · Anomaly Detection</p>
+            <div class="meta">
+              <span class="chip">Neural DE</span>
+              <span class="chip">Anomaly Detection</span>
+              <span class="chip">Irregular TS</span>
+            </div>
+          </div>
+        </article>
+        <article class="card motion-card">
+          <div class="card-body">
+            <h3>Multi-risk 생존분석 (종단 데이터)</h3>
+            <p>Survival Analysis · Longitudinal Data · Multi-risk</p>
+            <div class="meta">
+              <span class="chip">Survival</span>
+              <span class="chip">Longitudinal</span>
+              <span class="chip">Multi-risk</span>
+            </div>
+          </div>
+        </article>
+        <article class="card motion-card">
+          <div class="card-body">
+            <h3>갑상선 항진증 환자 복용량 추천</h3>
+            <p>Dose Recommendation · Healthcare · Hyperthyroidism</p>
+            <div class="meta">
+              <span class="chip">Healthcare</span>
+              <span class="chip">Recommendation</span>
+              <span class="chip">Hyperthyroidism</span>
+            </div>
+          </div>
+        </article>
+      </div>
     </section>
 
-    <footer class="container">
-      <footer>© <span id="y"></span> SEUNGSU KAM · CC BY-NC 4.0</footer>
-    </footer>
-  </main>
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+    <!-- Publications -->
+    <section class="section" id="pubs">
+      <h2>논문 및 발표</h2>
+      <ul class="publist">
+        <li><strong>Comprehensive review of neural differential equations for time series analysis</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. (2025). <a href="https://arxiv.org/abs/2502.09885" target="_blank" rel="noopener">arXiv:2502.09885</a></li>
+        <li><strong>Neural Langevin-type Stochastic Differential Equations for Astronomical time series Classification under Irregular Observations</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. (ICLR 2024 Workshop, AI4DE). <a href="https://openreview.net/forum?id=UopIqLxJAi" target="_blank" rel="noopener">OpenReview</a></li>
+        <li><strong>Real-Time Change Point Detection with Deep Generative Model in AGNs</strong> — <u>Kam, Seungsu</u>; Yoo, Jitae; Shin, Minsu; Kim, Sungil (2023). <a href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11472774" target="_blank" rel="noopener">DBpia</a></li>
+        <li><strong>Optimal and Personalized Dose Determination for Patients with Thyroid Hormone Disorders Using Deep Learning-Based Survival Analysis</strong> — <u>Kam, Seungsu</u>; Cho, Jaehun; Shin, Kyubo; Moon, JaeHoon; Kim, Sungil (2023). <a href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11609748" target="_blank" rel="noopener">DBpia</a></li>
+        <li><strong>Personalized Initial Dosage Recommender System for Hyperthyroidism Patients Using Deep Survival Analysis</strong> — Cho, Jaehun; <u>Kam, Seungsu</u>; et al. (2023). <a href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11800944" target="_blank" rel="noopener">DBpia</a></li>
+        <li><strong>Enhancing Astronomical time series Classification with Neural Stochastic Differential Equations under Irregular Observations</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; Lim, Dong-Young; Kim, Sungil (2024-02-20). <a href="https://scholarworks.unist.ac.kr/handle/201301/81822" target="_blank" rel="noopener">Record</a> · <a href="https://sites.google.com/vt.edu/kgml-bridge-aaai-24/#h.8bxu7wv3ha6t" target="_blank" rel="noopener">Slides</a></li>
+        <li><strong>Real-Time Detection of Changing-State Active Galactic Nuclei using a Deep Learning Approach</strong> — <u>Kam, Seungsu</u>; Yoo, Jitae; Shin, Minsu; Kim, Sungil (2023-06-01). <a href="https://scholarworks.unist.ac.kr/handle/201301/74710" target="_blank" rel="noopener">Record</a></li>
+        <li><strong>Addressing Spatial Gaps in XCO2 Monitoring: A Machine Learning Approach for South Korea</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; et al. (2024-10-25). <a href="https://scholarworks.unist.ac.kr/handle/201301/86014" target="_blank" rel="noopener">Record</a></li>
+        <li><strong>Assessing User Retention of Upgradable Home Appliances: Survival Analysis</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; Hur, Chanbeom; Kim, Sungil (2024-05-02). <a href="https://scholarworks.unist.ac.kr/handle/201301/82924" target="_blank" rel="noopener">Record</a></li>
+      </ul>
+    </section>
+
+    <footer>© <span id="y"></span> SEUNGSU KAM · <a href="#">scholar</a></footer>
+  </div>
+
+  <!-- Custom cursor element -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Motion One (by Framer) for animations -->
+  <script type="module">
+    import { animate, stagger } from "https://cdn.skypack.dev/motion@10.16.2";
+
+    // Header entrance
+    animate([".title", ".subtitle", ".actions"], { opacity: [0,1], y: [12,0] }, { delay: stagger(0.08), duration: .6, easing: "ease-out"});
+    // Profile/card reveal
+    animate("#profileCard", { opacity: [0,1], scale: [0.98,1] }, { duration: .5, easing: "ease-out", delay: .2 });
+    // Cards float-in
+    animate(".motion-card", { opacity: [0,1], y: [16,0] }, { delay: stagger(0.06, { start: .1 }), duration: .5, easing: "cubic-bezier(.2,.8,.2,1)"});
+  </script>
+
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Theme toggle
+    (function(){
+      const key = "theme"; const btn = document.getElementById("themeBtn"); const root = document.documentElement;
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      function applyTheme(v){ root.setAttribute("data-theme", v); try{ localStorage.setItem(key, v); }catch(e){} }
+      function currentTheme(){ const saved = localStorage.getItem(key); if(saved === "light" || saved === "dark") return saved; return prefersDark ? "dark" : "light" }
+      applyTheme(currentTheme());
+      btn.addEventListener("click", ()=> applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark"));
+    })();
+
+    // Cursor follow + link hover state + click ring
+    (function(){
+      const cursor = document.getElementById('cursor');
+      let x = window.innerWidth/2, y = window.innerHeight/2, tx=x, ty=y;
+      const lerp=(a,b,n)=>a+(b-a)*n;
+      function loop(){ x = lerp(x, tx, 0.18); y = lerp(y, ty, 0.18); cursor.style.transform = `translate(${x}px, ${y}px)`; requestAnimationFrame(loop); }
+      window.addEventListener('mousemove', (e)=>{ tx = e.clientX; ty = e.clientY; });
+      document.addEventListener('mouseover', (e)=>{ cursor.classList.toggle('is-link', !!e.target.closest('a,.btn,.card')); });
+      document.addEventListener('click', (e)=>{ const r=document.createElement('span'); r.className='click-ring'; document.body.appendChild(r); r.style.left=e.clientX+'px'; r.style.top=e.clientY+'px'; r.animate([{transform:'scale(1)', opacity:.6},{transform:'scale(8)', opacity:0}],{duration:520,easing:'ease-out'}).onfinish=()=>r.remove(); });
+      loop();
+    })();
+  </script>
 </body>
 </html>
+
+
 
 
