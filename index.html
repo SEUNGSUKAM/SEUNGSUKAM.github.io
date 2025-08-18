@@ -49,7 +49,11 @@
     .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; font-weight:600; background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,0)); border:1px solid var(--glass-border); backdrop-filter: blur(12px); box-shadow:var(--shadow-lg); color:var(--text); transition:transform .15s ease, box-shadow .15s ease, background .2s ease}
     .btn:hover{transform:translateY(-1px)}
     .btn.primary{background:linear-gradient(180deg, rgba(124,150,255,.25), rgba(124,150,255,.08))}
-
+    .subtitle-kr{
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin: 2px 0 8px;
+    }
     .theme-toggle{position:fixed; right:14px; bottom:14px; z-index:3; background:var(--glass); border:1px solid var(--glass-border); backdrop-filter: blur(10px); border-radius:999px; padding:10px 12px; box-shadow:var(--shadow-lg); cursor:pointer; user-select:none}
 
     /* Profile */
@@ -140,17 +144,60 @@ My work involves Neural Differential Equations, Conditional Density Estimation, 
     <section class="section" id="projects">
       <h2>🛠 Project</h2>
       <div class="grid">
-        <article class="card"><div class="card-body"><h3>🌌 실시간 퀘이사 이상 탐지</h3><p>Real-Time · Physics Informed · Anomaly Detection</p></div></article>
-        <article class="card"><div class="card-body"><h3>🔭 불규칙 천체 시계열 이상치 탐지</h3><p>Irregular Time Series · Anomaly Detection · Neural DE</p></div></article>
-        <article class="card"><div class="card-body"><h3>📊 종단 생존분석</h3><p>Longitudinal Data · Survival · Multi-Risk</p></div></article>
-        <article class="card"><div class="card-body"><h3>💊 갑상선 항진증 환자 복용량 추천</h3><p>Hyperthyroidsm · Recommendation · Healthcare</p></div></article>
+        <article class="card">
+          <div class="card-body">
+            <h3>🌌 Real-Time Quasar Anomaly Detection</h3>
+            <p class="subtitle-kr">실시간 퀘이사 이상 탐지</p>
+            <div class="meta">
+              <span class="chip">Real-Time</span>
+              <span class="chip">Physics-Informed</span>
+              <span class="chip">Anomaly Detection</span>
+            </div>
+          </div>
+        </article>
+    
+        <article class="card">
+          <div class="card-body">
+            <h3>🔭 Irregular Astronomical Time Series Anomaly Detection</h3>
+            <p class="subtitle-kr">불규칙 천체 시계열 이상치 탐지</p>
+            <div class="meta">
+              <span class="chip">Irregular TS</span>
+              <span class="chip">Neural DE</span>
+              <span class="chip">Classification</span>
+            </div>
+          </div>
+        </article>
+    
+        <article class="card">
+          <div class="card-body">
+            <h3>📊 Longitudinal Multi-risk Survival Analysis</h3>
+            <p class="subtitle-kr">종단 생존분석</p>
+            <div class="meta">
+              <span class="chip">Longitudinal</span>
+              <span class="chip">Multi-risk</span>
+              <span class="chip">Survival</span>
+            </div>
+          </div>
+        </article>
+    
+        <article class="card">
+          <div class="card-body">
+            <h3>💊 Thyroid Hormone Dosage Recommendation</h3>
+            <p class="subtitle-kr">갑상선 항진증 환자 복용량 추천</p>
+            <div class="meta">
+              <span class="chip">Hyperthyroidism</span>
+              <span class="chip">Recommendation</span>
+              <span class="chip">Healthcare</span>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
 
     <section class="section" id="papers">
       <h2>📑 Papers</h2>
       <ul class="publist pubgrid">
-        <li>(2025) <strong>Comprehensive review of neural differential equations for time series analysis</strong>, Oh, Y.; <u>Kam, S.</u>; Lee, J.; Lim, D.; Kim, S.; Bui, A. — <a href="https://arxiv.org/abs/2502.09885">arXiv</a></li>
+        <li>(2025) <strong>Comprehensive review of neural differential equations for time series analysis</strong>, Oh, Y.; <u>Kam, S.</u>; Lee, J.; Lim, D.; Kim, S.; Bui, A., <a href="https://arxiv.org/abs/2502.09885">arXiv</a></li>
         <li>(2024) <strong>(Short) Neural Langevin-type Stochastic Differential Equations for Astronomical time series Classification under Irregular Observations</strong>, Oh, Y.; <u>Kam, S.</u>; Lim, D.; Kim, S., ICLR Workshop</li>
         <li>(2024) <strong>(Short) Enhancing Astronomical time series Classification with Neural Stochastic Differential Equations under Irregular Observations</strong>, Oh, Y.; <u>Kam, S.</u>; Lim, D.; Kim, S., AAAI Workshop, <a href="https://sites.google.com/vt.edu/kgml-bridge-aaai-24/#h.8bxu7wv3ha6t">workshop</a></li>
       </ul>
