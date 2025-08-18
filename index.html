@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>감승수 | UNIST 석박통합 7학기 포트폴리오</title>
-  <meta name="description" content="UNIST 석박통합 7학기 | 시계열 · 이상탐지 · 연속시간 모델링 · 종단 생존분석" />
+  <title>감승수 | 감승수 포트폴리오</title>
+  <meta name="description" content="감승수 | 시계열 · 이상탐지 · 연속시간 모델링 · 종단 생존분석" />
   <meta name="color-scheme" content="light dark" />
   <style>
     :root{
@@ -78,7 +78,14 @@
 
     ul.publist{list-style:none; padding:0; margin:8px 0 0}
     ul.publist li{background:var(--glass); border:1px solid var(--glass-border); backdrop-filter: blur(8px); border-radius:12px; padding:12px 14px; margin:10px 0}
-
+/*     ##### */
+    .publist.pubgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 14px;
+    }
+    .publist.pubgrid li { margin:0; }
+/*     ##### */
     footer{text-align:center; color:var(--muted); padding:40px 0}
     .cursor { position: fixed; inset: 0 auto auto 0; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--primary); pointer-events: none; z-index: 10; translate: -50% -50%; mix-blend-mode: screen; backdrop-filter: blur(4px)}
     .cursor.is-link{ width: 34px; height: 34px; background: rgba(124,150,255,.15) }
@@ -98,7 +105,6 @@
       <h1 class="title">SEUNGSU KAM(감승수)</h1>
       <p class="subtitle"><strong>UNIST PhD Student</strong>. 불규칙 시계열 · 이상탐지 · 연속시간 모델링 · 종단 생존분석.</p>
       <div class="profile" id="profileCard">
-        <!-- 로컬/레포 이미지: fig/profile.jpg 를 사용하세요 -->
         <img class="avatar" src="figs/profile.jpg" alt="감승수 프로필 사진" />
         <div>
           <h3>👤 About</h3>
@@ -134,10 +140,10 @@ My work involves Neural Differential Equations, Conditional Density Estimation, 
     <section class="section" id="projects">
       <h2>🛠 Project</h2>
       <div class="grid">
-        <article class="card"><div class="card-body"><h3>🌌 실시간 퀘이사 이상 탐지</h3><p>Physics Informed · Real-Time · Anomaly Detection</p></div></article>
-        <article class="card"><div class="card-body"><h3>🔭 불규칙 천체 시계열 이상치 탐지</h3><p>Neural DE · Anomaly Detection · Classification</p></div></article>
-        <article class="card"><div class="card-body"><h3>📊 종단 생존분석</h3><p>Multi-Risk · Survival · Longitudinal Data</p></div></article>
-        <article class="card"><div class="card-body"><h3>💊 갑상선 항진증 환자 복용량 추천</h3><p>Hyperthyroidsm · Healthcare · Recommendation</p></div></article>
+        <article class="card"><div class="card-body"><h3>🌌 실시간 퀘이사 이상 탐지</h3><p>Real-Time · Physics Informed · Anomaly Detection</p></div></article>
+        <article class="card"><div class="card-body"><h3>🔭 불규칙 천체 시계열 이상치 탐지</h3><p>Irregular Time Series · Anomaly Detection · Neural DE</p></div></article>
+        <article class="card"><div class="card-body"><h3>📊 종단 생존분석</h3><p>Longitudinal Data · Survival · Multi-Risk</p></div></article>
+        <article class="card"><div class="card-body"><h3>💊 갑상선 항진증 환자 복용량 추천</h3><p>Hyperthyroidsm · Recommendation · Healthcare</p></div></article>
       </div>
     </section>
 
@@ -145,19 +151,19 @@ My work involves Neural Differential Equations, Conditional Density Estimation, 
       <h2>📑 Papers</h2>
       <ul class="publist">
         <li>2025 — <strong>Comprehensive review of neural differential equations for time series analysis</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. — <a href="https://arxiv.org/abs/2502.09885">arXiv</a></li>
-        <li>2024 — <strong>Neural Langevin-type Stochastic Differential Equations for Astronomical time series Classification under Irregular Observations</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. — ICLR Workshop</li>
+        <li>2024 — <strong>(Short) Neural Langevin-type Stochastic Differential Equations for Astronomical time series Classification under Irregular Observations</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. — ICLR Workshop</li>
       </ul>
     </section>
 
     <section class="section" id="talks">
       <h2>🎤 Presentation</h2>
-      <ul class="publist">
+<!--       <ul class="publist"> -->
+      <ul class="publist pubgrid">
         <li>2024 — <strong>Enhancing Astronomical time series Classification with Neural Stochastic Differential Equations under Irregular Observations</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. — AAAI Workshop — <a href="https://scholarworks.unist.ac.kr/handle/201301/81822">Record</a></li>
-        <li>2024 — <strong>Addressing Spatial Gaps in XCO2 Monitoring</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://scholarworks.unist.ac.kr/handle/201301/86014">Record</a></li>
-        <li>2024 — <strong>Assessing User Retention of Upgradable Home Appliances</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://scholarworks.unist.ac.kr/handle/201301/82924">Record</a></li>
-        <li>2023 — <strong>Optimal and Personalized Dose Determination...</strong> — <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11609748">DBpia</a></li>
-        <li>2023 — <strong>Personalized Initial Dosage Recommender...</strong> — <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11800944">DBpia</a></li>
-        <li>2023 — <strong>Real-Time Detection of Changing-State AGNs</strong> — <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://scholarworks.unist.ac.kr/handle/201301/74710">Record</a></li>
+        <li>2024 — <strong>Addressing Spatial Gaps in XCO2 Monitoring: A Machine Learning Approach for South Korea</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://scholarworks.unist.ac.kr/handle/201301/86014">Record</a></li>
+        <li>2024 — <strong>Assessing User Retention of Connected Home Appliances: Survival Analysis</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://scholarworks.unist.ac.kr/handle/201301/82924">Record</a></li>
+        <li>2023 — <strong>Optimal and Personalized Dose Determination for Patients with Thyroid Hormone Disorders Using Deep Learning-Based Survival Analysis</strong> — <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11609748">DBpia</a></li>
+        <li>2023 — <strong>Real-Time Detection of Changing-State Active Galactic Nuclei using a Deep Learning Approach</strong> — <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://scholarworks.unist.ac.kr/handle/201301/74710">Record</a></li>
       </ul>
     </section>
 
@@ -165,7 +171,7 @@ My work involves Neural Differential Equations, Conditional Density Estimation, 
       <h2>🧑‍🏫 Activity</h2>
       <ul class="publist">
         <li>2024 Summer — Teaching Assistant, LG LDC PBL Course </li>
-        <li>2023 Fall — Teaching Assistant, Statistical Quality Management</li>
+        <li>2023 Spring — Teaching Assistant, Statistical Quality Management</li>
       </ul>
     </section>
 
