@@ -15,6 +15,19 @@
       --maxw:1200px; --space:clamp(16px,2vw,24px);
       --space-lg: clamp(36px, 6vw, 80px);
     }
+    /* Explicit theme tokens so toggle works */
+    html[data-theme="light"]{
+      --bg:#f7f9ff; --bg-accent:#ecf1ff; --text:#0e1116; --muted:#616b79;
+      --primary:#536dfe; --ring: rgba(83,109,254,.35);
+      --glass: rgba(255,255,255,.55); --glass-border: rgba(0,24,168,.10);
+      --shadow-lg:0 10px 30px rgba(17,40,120,.15);
+    }
+    html[data-theme="dark"]{
+      --bg:#0b0d12; --bg-accent:#0e1322; --text:#e9edf1; --muted:#a7b0bf;
+      --primary:#7c96ff; --ring: rgba(124,150,255,.35);
+      --glass: rgba(255,255,255,.06); --glass-border: rgba(255,255,255,.18);
+      --shadow-lg:0 10px 40px rgba(0,0,0,.35);
+    }
 
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -39,10 +52,15 @@
 
     .theme-toggle{position:fixed; right:14px; bottom:14px; z-index:3; background:var(--glass); border:1px solid var(--glass-border); backdrop-filter: blur(10px); border-radius:999px; padding:10px 12px; box-shadow:var(--shadow-lg); cursor:pointer; user-select:none}
 
-    .profile{display:grid; grid-template-columns:96px 1fr; gap:16px; align-items:center; margin-top:24px; padding:16px; border-radius:var(--card-radius); background:var(--glass); border:1px solid var(--glass-border); box-shadow:var(--shadow-lg); backdrop-filter: blur(14px)}
-    .avatar{width:96px; height:96px; border-radius:18px; border:2px solid var(--glass-border); object-fit:cover; background:#ccc}
+    /* Profile */
+    .profile{display:grid; grid-template-columns:140px 1fr; gap:18px; align-items:center; margin-top:24px; padding:18px; border-radius:var(--card-radius); background:var(--glass); border:1px solid var(--glass-border); box-shadow:var(--shadow-lg); backdrop-filter: blur(14px)}
+    .avatar{width:140px; height:140px; border-radius:20px; border:2px solid var(--glass-border); object-fit:cover; background:#ddd}
     .profile h3{margin:0 0 6px}
     .profile .meta{color:var(--muted)}
+    .profile .subsection{margin-top:12px}
+    .profile .subsection h4{margin:0 0 6px; font-size:1rem}
+    .tagset{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
+    .tag{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,.12)); border:1px solid var(--glass-border); backdrop-filter: blur(8px); font-size:.92rem; color:var(--text)}
 
     .section{margin-top: clamp(26px, 4vw, 44px)}
     .section h2{margin:0 0 10px; font-size: clamp(20px, 3vw, 28px)}
@@ -57,8 +75,6 @@
     .card-body{position:relative; padding:clamp(16px,2.2vw,22px)}
     .card h3{margin:0 0 6px; font-size:clamp(18px,2.2vw,22px)}
     .card p{margin:0 0 12px; color:var(--muted)}
-    .meta{display:flex; gap:10px; flex-wrap:wrap; align-items:center; font-size:.9em; color:var(--muted)}
-    .chip{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.04)); border:1px solid var(--glass-border); backdrop-filter: blur(8px)}
 
     ul.publist{list-style:none; padding:0; margin:8px 0 0}
     ul.publist li{background:var(--glass); border:1px solid var(--glass-border); backdrop-filter: blur(8px); border-radius:12px; padding:12px 14px; margin:10px 0}
@@ -75,20 +91,19 @@
     <div class="blob b3" style="top:20vmax; left:35vmax"></div>
   </div>
 
-  <button class="theme-toggle" id="themeBtn">🌓</button>
+  <button class="theme-toggle" id="themeBtn" title="테마 전환">🌓</button>
 
   <div class="wrap">
     <header>
-      <h1 class="title">안녕하세요, 감승수(SEUNGSU KAM) 👋</h1>
-      <p class="subtitle">UNIST 석박통합 <strong>7학기</strong>. 시계열 · 이상탐지 · 연속시간 모델링 · 종단 생존분석을 연구합니다.</p>
+      <h1 class="title">SEUNGSU KAM(감승수)</h1>
+      <p class="subtitle"><strong>UNIST PhD Student</strong>. 불규칙 시계열 · 이상탐지 · 연속시간 모델링 · 종단 생존분석.</p>
       <div class="profile" id="profileCard">
-        <img class="avatar" src="https://placehold.co/192x192/png" alt="감승수 프로필 사진" />
+        <!-- 로컬/레포 이미지: fig/profile.jpg 를 사용하세요 -->
+        <img class="avatar" src="figs/profile.jpg" alt="감승수 프로필 사진" />
         <div>
-          <h3>감승수 · SEUNGSU KAM</h3>
-          <p class="meta">UNIST | AI대학원 · Time Series · Anomaly Detection · Continuous-time Modeling · Survival Analysis</p>
-          <div class="subsection">
-            <h4>👤 About</h4>
-            <p class="meta">UNIST 통합과정 7학기생. Physics-informed CDE, 불규칙 샘플링 시계열, Multi-risk 생존분석에 집중하고 있습니다.</p>
+          <h3>👤 About</h3>
+          <p class="meta">I am a Ph.D. student in Industrial Engineering at UNIST under the supervision of Professor Sungil Kim. 
+My work involves Neural Differential Equations, Conditional Density Estimation, and Survival Analysis, which I apply to problems such as real-time anomaly detection, astronomical object anomaly classification, longitudinal patient outcome prediction, and personalized thyroid hormone dosage recommendation.</p>
           </div>
           <div class="subsection">
             <h4>🔬 Research Interests</h4>
@@ -96,10 +111,16 @@
               <span class="tag">⏱ Time Series Analysis</span>
               <span class="tag">🔎 Anomaly Detection</span>
               <span class="tag">⌛ Continuous-time Modeling</span>
-              <span class="tag">📊 Multi-risk Survival Analysis</span>
+              <span class="tag">📊 Longitudinal Survival Analysis</span>
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="actions" style="margin-top:14px">
+        <a class="btn primary" href="mailto:lewki83@unist.ac.kr">📧 Email</a>
+        <a class="btn" href="https://github.com/seungsukam" target="_blank" rel="noopener">💻 GitHub</a>
+        <a class="btn" href="https://scholar.google.com/citations?user=yP1DmawAAAAJ&hl=ko" target="_blank" rel="noopener">🎓 Google Scholar</a>
       </div>
     </header>
 
@@ -107,46 +128,53 @@
       <h2>💼 Experience</h2>
       <ul class="publist">
         <li><strong>Ajou University</strong> — B.S. Industrial Engineering (2015–2022)</li>
-        <li><strong>UNIST</strong> — Integrated M.S./Ph.D. Industrial Engineering (2022–Present)</li>
+        <li><strong>Ulsan National Institute of Science and Technology</strong> — Integrated M.S./Ph.D. Industrial Engineering (2022–Present)</li>
       </ul>
     </section>
 
     <section class="section" id="projects">
-      <h2>🛠 프로젝트</h2>
+      <h2>🛠 Project</h2>
       <div class="grid">
-        <article class="card"><div class="card-body"><h3>🌌 실시간 퀘이사 이상 탐지</h3><p>Physics Informed · CDE · Irregular Time Series</p></div></article>
-        <article class="card"><div class="card-body"><h3>🔭 불규칙 천체 시계열 이상치 탐지</h3><p>Neural DE · Anomaly Detection</p></div></article>
-        <article class="card"><div class="card-body"><h3>📊 Multi-risk 생존분석</h3><p>Survival · Longitudinal Data</p></div></article>
-        <article class="card"><div class="card-body"><h3>💊 갑상선 항진증 환자 복용량 추천</h3><p>Healthcare · Recommendation</p></div></article>
+        <article class="card"><div class="card-body"><h3>🌌 실시간 퀘이사 이상 탐지</h3><p>Physics Informed · Real-Time · Anomaly Detection</p></div></article>
+        <article class="card"><div class="card-body"><h3>🔭 불규칙 천체 시계열 이상치 탐지</h3><p>Neural DE · Anomaly Detection · Classification</p></div></article>
+        <article class="card"><div class="card-body"><h3>📊 종단 생존분석</h3><p>Multi-Risk · Survival · Longitudinal Data</p></div></article>
+        <article class="card"><div class="card-body"><h3>💊 갑상선 항진증 환자 복용량 추천</h3><p>Hyperthyroidsm · Healthcare · Recommendation</p></div></article>
       </div>
     </section>
 
     <section class="section" id="papers">
-      <h2>📑 논문 (Papers)</h2>
+      <h2>📑 Papers</h2>
       <ul class="publist">
         <li>2025 — <strong>Comprehensive review of neural differential equations for time series analysis</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. — <a href="https://arxiv.org/abs/2502.09885">arXiv</a></li>
-        <li>2024 — <strong>Addressing Spatial Gaps in XCO2 Monitoring</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://scholarworks.unist.ac.kr/handle/201301/86014">Record</a></li>
-        <li>2024 — <strong>Assessing User Retention of Upgradable Home Appliances</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://scholarworks.unist.ac.kr/handle/201301/82924">Record</a></li>
-        <li>2023 — <strong>Optimal and Personalized Dose Determination...</strong> — <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11609748">DBpia</a></li>
-        <li>2023 — <strong>Personalized Initial Dosage Recommender...</strong> — <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11800944">DBpia</a></li>
+        <li>2024 — <strong>Neural Langevin-type Stochastic Differential Equations for Astronomical time series Classification under Irregular Observations</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. — ICLR Workshop</li>
       </ul>
     </section>
 
     <section class="section" id="talks">
-      <h2>🎤 발표 (Talks)</h2>
+      <h2>🎤 Presentation</h2>
       <ul class="publist">
-        <li>2024 — <strong>Neural Langevin-type SDEs for Astronomical TS Classification</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. — ICLR Workshop</li>
-        <li>2024 — <strong>Enhancing Astronomical TS Classification with Neural SDEs</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. — AAAI Workshop — <a href="https://scholarworks.unist.ac.kr/handle/201301/81822">Record</a></li>
-        <li>2023 — <strong>Real-Time Change Point Detection with Deep Generative Model in AGNs</strong> — <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11472774">DBpia</a></li>
+        <li>2024 — <strong>Enhancing Astronomical time series Classification with Neural Stochastic Differential Equations under Irregular Observations</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. — AAAI Workshop — <a href="https://scholarworks.unist.ac.kr/handle/201301/81822">Record</a></li>
+        <li>2024 — <strong>Addressing Spatial Gaps in XCO2 Monitoring</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://scholarworks.unist.ac.kr/handle/201301/86014">Record</a></li>
+        <li>2024 — <strong>Assessing User Retention of Upgradable Home Appliances</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://scholarworks.unist.ac.kr/handle/201301/82924">Record</a></li>
+        <li>2023 — <strong>Optimal and Personalized Dose Determination...</strong> — <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11609748">DBpia</a></li>
+        <li>2023 — <strong>Personalized Initial Dosage Recommender...</strong> — <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11800944">DBpia</a></li>
         <li>2023 — <strong>Real-Time Detection of Changing-State AGNs</strong> — <u>Kam, Seungsu</u>; et al. — KIIE — <a href="https://scholarworks.unist.ac.kr/handle/201301/74710">Record</a></li>
       </ul>
     </section>
 
     <section class="section" id="ta">
-      <h2>🧑‍🏫 조교 활동</h2>
+      <h2>🧑‍🏫 Activity</h2>
       <ul class="publist">
         <li>2025 Spring — Teaching Assistant, Time Series Analysis</li>
         <li>2024 Fall — Teaching Assistant, Machine Learning</li>
+      </ul>
+    </section>
+
+    <section class="section" id="awards">
+      <h2>🏆 Awards</h2>
+      <ul class="publist">
+        <li>2020 — Dean's list, College of Engineering, Ajou University </li>
+        <li>2021 — Dean's list, College of Engineering, Ajou University </li>
       </ul>
     </section>
 
@@ -167,5 +195,6 @@
   </script>
 </body>
 </html>
+
 
 
