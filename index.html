@@ -35,7 +35,7 @@
     .blob{position:absolute; width:50vmax; height:50vmax; border-radius:50%; background: radial-gradient(closest-side, rgba(124,150,255,.9), transparent 65%); animation: float 18s ease-in-out infinite; mix-blend-mode: screen}
     .blob.b2{background: radial-gradient(closest-side, rgba(33,212,180,.9), transparent 65%); animation-duration: 22s}
     .blob.b3{background: radial-gradient(closest-side, rgba(255,105,180,.75), transparent 65%); animation-duration: 26s}
-    @keyframes float{0%{transform:translate(-10%,-10%)}33%{transform:translate(60%,-20%)}66%{transform:translate(0%,40%)}100%{transform:translate(-10%,-10%)}}
+    @keyframes float{0%{transform:translate(-10%,-10%)}33%{transform:translate(60%,-20%)}66%{transform:translate(0%,40%)}100%{transform:translate(-10%,-10%)} }
 
     header{padding-top: clamp(36px, 6vw, 72px); text-align:center}
     .title{font-size:clamp(28px,4vw,44px); font-weight:800; letter-spacing:.3px; margin:0 0 10px}
@@ -98,18 +98,18 @@
   <div class="wrap">
     <header>
       <h1 class="title">안녕하세요, 감승수(SEUNGSU KAM) 👋</h1>
-      <p class="subtitle">UNIST 석박통합 <strong>7학기</strong>. 시계열 · 이상탐지 · 연속시간 모델링 · 종단 생존분석을 연구합니다.</p>
+      <p class="subtitle">UNIST 석박통합 <strong>7학기</strong>. ⏱ 시계열 · 🔎 이상탐지 · ⌛ 연속시간 모델링 · 📊 종단 생존분석을 연구합니다.</p>
       <div class="actions">
-        <a class="btn primary" href="mailto:lewki83@unist.ac.kr">Email</a>
-        <a class="btn" href="아주대학교_감승수_CV.pdf" target="_blank" rel="noopener">CV (PDF)</a>
-        <a class="btn" href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a>
+        <a class="btn primary" href="mailto:lewki83@unist.ac.kr">📧 Email</a>
+        <a class="btn" href="https://github.com/username" target="_blank" rel="noopener">💻 GitHub</a>
+        <a class="btn" href="https://scholar.google.com" target="_blank" rel="noopener">🎓 Google Scholar</a>
       </div>
       <!-- Profile card with photo space -->
       <div class="profile" id="profileCard">
         <img class="avatar" src="https://placehold.co/192x192/png" alt="감승수 프로필 사진" />
         <div>
           <h3>감승수 · SEUNGSU KAM</h3>
-          <p class="meta">UNIST | AI대학원 · Time Series · Anomaly Detection · Continuous-time Modeling · Survival Analysis</p>
+          <p class="meta">UNIST | AI대학원 · ⏱ Time Series · 🔎 Anomaly Detection · ⌛ Continuous-time Modeling · 📊 Survival Analysis</p>
           <p class="meta">UNIST 통합과정 7학기생. Physics-informed CDE, 불규칙 샘플링 시계열, Multi-risk 생존분석에 집중하고 있습니다.</p>
         </div>
       </div>
@@ -117,7 +117,7 @@
 
     <!-- Experience -->
     <section class="section" id="career">
-      <h2>Experience</h2>
+      <h2>💼 Experience</h2>
       <p class="lead">학력 및 활동</p>
       <ul class="publist">
         <li><strong>Ajou University</strong> — B.S. in Industrial Engineering (2015–2022)</li>
@@ -127,11 +127,11 @@
 
     <!-- Projects -->
     <section class="section" id="projects" aria-label="프로젝트 목록">
-      <h2>프로젝트</h2>
+      <h2>🛠 프로젝트</h2>
       <div class="grid">
         <article class="card motion-card">
           <div class="card-body">
-            <h3>실시간 상태 이상 퀘이사 탐지</h3>
+            <h3>🌌 실시간 상태 이상 퀘이사 탐지</h3>
             <p>Physics Informed · Conditional Density Estimation · Irregular Time Series</p>
             <div class="meta">
               <span class="chip">CDE</span>
@@ -142,7 +142,7 @@
         </article>
         <article class="card motion-card">
           <div class="card-body">
-            <h3>불규칙 천체 시계열 이상치 탐지</h3>
+            <h3>🔭 불규칙 천체 시계열 이상치 탐지</h3>
             <p>Neural Differential Equation · Physics Informed · Anomaly Detection</p>
             <div class="meta">
               <span class="chip">Neural DE</span>
@@ -153,7 +153,7 @@
         </article>
         <article class="card motion-card">
           <div class="card-body">
-            <h3>Multi-risk 생존분석 (종단 데이터)</h3>
+            <h3>📊 Multi-risk 생존분석 (종단 데이터)</h3>
             <p>Survival Analysis · Longitudinal Data · Multi-risk</p>
             <div class="meta">
               <span class="chip">Survival</span>
@@ -164,7 +164,7 @@
         </article>
         <article class="card motion-card">
           <div class="card-body">
-            <h3>갑상선 항진증 환자 복용량 추천</h3>
+            <h3>💊 갑상선 항진증 환자 복용량 추천</h3>
             <p>Dose Recommendation · Healthcare · Hyperthyroidism</p>
             <div class="meta">
               <span class="chip">Healthcare</span>
@@ -177,67 +177,12 @@
     </section>
 
     <!-- Publications -->
-    <section class="section" id="pubs">
-      <h2>논문 및 발표</h2>
+    <section class="section" id="papers">
+      <h2>📑 논문 (Papers)</h2>
       <ul class="publist">
-        <li><strong>Comprehensive review of neural differential equations for time series analysis</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. (2025). <a href="https://arxiv.org/abs/2502.09885" target="_blank" rel="noopener">arXiv:2502.09885</a></li>
-        <li><strong>Neural Langevin-type Stochastic Differential Equations for Astronomical time series Classification under Irregular Observations</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. (ICLR 2024 Workshop, AI4DE). <a href="https://openreview.net/forum?id=UopIqLxJAi" target="_blank" rel="noopener">OpenReview</a></li>
-        <li><strong>Real-Time Change Point Detection with Deep Generative Model in AGNs</strong> — <u>Kam, Seungsu</u>; Yoo, Jitae; Shin, Minsu; Kim, Sungil (2023). <a href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11472774" target="_blank" rel="noopener">DBpia</a></li>
-        <li><strong>Optimal and Personalized Dose Determination for Patients with Thyroid Hormone Disorders Using Deep Learning-Based Survival Analysis</strong> — <u>Kam, Seungsu</u>; Cho, Jaehun; Shin, Kyubo; Moon, JaeHoon; Kim, Sungil (2023). <a href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11609748" target="_blank" rel="noopener">DBpia</a></li>
-        <li><strong>Personalized Initial Dosage Recommender System for Hyperthyroidism Patients Using Deep Survival Analysis</strong> — Cho, Jaehun; <u>Kam, Seungsu</u>; et al. (2023). <a href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11800944" target="_blank" rel="noopener">DBpia</a></li>
-        <li><strong>Enhancing Astronomical time series Classification with Neural Stochastic Differential Equations under Irregular Observations</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; Lim, Dong-Young; Kim, Sungil (2024-02-20). <a href="https://scholarworks.unist.ac.kr/handle/201301/81822" target="_blank" rel="noopener">Record</a> · <a href="https://sites.google.com/vt.edu/kgml-bridge-aaai-24/#h.8bxu7wv3ha6t" target="_blank" rel="noopener">Slides</a></li>
-        <li><strong>Real-Time Detection of Changing-State Active Galactic Nuclei using a Deep Learning Approach</strong> — <u>Kam, Seungsu</u>; Yoo, Jitae; Shin, Minsu; Kim, Sungil (2023-06-01). <a href="https://scholarworks.unist.ac.kr/handle/201301/74710" target="_blank" rel="noopener">Record</a></li>
-        <li><strong>Addressing Spatial Gaps in XCO2 Monitoring: A Machine Learning Approach for South Korea</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; et al. (2024-10-25). <a href="https://scholarworks.unist.ac.kr/handle/201301/86014" target="_blank" rel="noopener">Record</a></li>
-        <li><strong>Assessing User Retention of Upgradable Home Appliances: Survival Analysis</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; Hur, Chanbeom; Kim, Sungil (2024-05-02). <a href="https://scholarworks.unist.ac.kr/handle/201301/82924" target="_blank" rel="noopener">Record</a></li>
-      </ul>
-    </section>
-
-    <footer>© <span id="y"></span> SEUNGSU KAM · <a href="#">scholar</a></footer>
-  </div>
-
-  <!-- Custom cursor element -->
-  <div class="cursor" id="cursor"></div>
-
-  <!-- Motion One (by Framer) for animations -->
-  <script type="module">
-    import { animate, stagger } from "https://cdn.skypack.dev/motion@10.16.2";
-
-    // Header entrance
-    animate([".title", ".subtitle", ".actions"], { opacity: [0,1], y: [12,0] }, { delay: stagger(0.08), duration: .6, easing: "ease-out"});
-    // Profile/card reveal
-    animate("#profileCard", { opacity: [0,1], scale: [0.98,1] }, { duration: .5, easing: "ease-out", delay: .2 });
-    // Cards float-in
-    animate(".motion-card", { opacity: [0,1], y: [16,0] }, { delay: stagger(0.06, { start: .1 }), duration: .5, easing: "cubic-bezier(.2,.8,.2,1)"});
-  </script>
-
-  <script>
-    // Year
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Theme toggle
-    (function(){
-      const key = "theme"; const btn = document.getElementById("themeBtn"); const root = document.documentElement;
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      function applyTheme(v){ root.setAttribute("data-theme", v); try{ localStorage.setItem(key, v); }catch(e){} }
-      function currentTheme(){ const saved = localStorage.getItem(key); if(saved === "light" || saved === "dark") return saved; return prefersDark ? "dark" : "light" }
-      applyTheme(currentTheme());
-      btn.addEventListener("click", ()=> applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark"));
-    })();
-
-    // Cursor follow + link hover state + click ring
-    (function(){
-      const cursor = document.getElementById('cursor');
-      let x = window.innerWidth/2, y = window.innerHeight/2, tx=x, ty=y;
-      const lerp=(a,b,n)=>a+(b-a)*n;
-      function loop(){ x = lerp(x, tx, 0.18); y = lerp(y, ty, 0.18); cursor.style.transform = `translate(${x}px, ${y}px)`; requestAnimationFrame(loop); }
-      window.addEventListener('mousemove', (e)=>{ tx = e.clientX; ty = e.clientY; });
-      document.addEventListener('mouseover', (e)=>{ cursor.classList.toggle('is-link', !!e.target.closest('a,.btn,.card')); });
-      document.addEventListener('click', (e)=>{ const r=document.createElement('span'); r.className='click-ring'; document.body.appendChild(r); r.style.left=e.clientX+'px'; r.style.top=e.clientY+'px'; r.animate([{transform:'scale(1)', opacity:.6},{transform:'scale(8)', opacity:0}],{duration:520,easing:'ease-out'}).onfinish=()=>r.remove(); });
-      loop();
-    })();
-  </script>
-</body>
-</html>
+        <li><strong>Comprehensive review of neural differential equations for time series analysis</strong> — Oh, YongKyung; <u>Kam, Seungsu</u>; et al. · arXiv (2025). <a href="https://arxiv.org/abs/2502.09885" target="_blank">PDF</a></li>
+        <li><strong>Addressing Spatial Gaps in XCO2 Monitoring: A Machine Learning Approach for South Korea</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; et al. · KIIE (2024). <a href="https://scholarworks.unist.ac.kr/handle/201301/86014" target="_blank">Record</a></li>
+        <li><strong>Assessing User Retention of Upgradable Home Appliances: Survival Analysis</strong> — Cho, Hyejin; <u>Kam, Seungsu</u>; et al. · KIIE (2024). <a href="https://sch
 
 
 
