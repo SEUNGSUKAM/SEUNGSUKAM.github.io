@@ -88,10 +88,10 @@ window.SITE = {
 
   // Heading above the Selected work cards.
   // 프로젝트를 추가해도 낡지 않도록 개수를 넣지 않았습니다.
-  // 다른 후보: 'Six problems where time is the hard part.'
-  //           'What time series look like outside the textbook.'
-  //           'From quasars to turbines to patients.'
-  workTitle: 'Learning dynamics from telescopes, machines, and patients.',
+  // 다른 후보: 'Learning dynamics from astronomical, industrial, and clinical time series.'
+  //           'Astronomical, industrial, clinical — the same question in three domains.'
+  //           'Six problems where time is the hard part.'
+  workTitle: 'Learning dynamics from astronomical, industrial, and clinical data.',
 
   /* ── 4. Selected work ───────────────────────────────────────────────────
    *  orb : 'mint' | 'peach' | 'lavender' | 'sky' | 'rose'   atmospheric tint
