@@ -86,8 +86,12 @@ window.SITE = {
     { name: 'KAIST',                                         logo: '', url: '' }
   ],
 
-  // Heading above the Selected work cards
-  workTitle: 'Six problems where the clock is not on a grid.',
+  // Heading above the Selected work cards.
+  // 프로젝트를 추가해도 낡지 않도록 개수를 넣지 않았습니다.
+  // 다른 후보: 'Six problems where time is the hard part.'
+  //           'What time series look like outside the textbook.'
+  //           'From quasars to turbines to patients.'
+  workTitle: 'Learning dynamics from telescopes, machines, and patients.',
 
   /* ── 4. Selected work ───────────────────────────────────────────────────
    *  orb : 'mint' | 'peach' | 'lavender' | 'sky' | 'rose'   atmospheric tint
