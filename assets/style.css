@@ -313,14 +313,39 @@ html[data-theme="dark"] .orb{opacity:.28; filter:blur(80px)}
   transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
 }
 .work-card:hover{transform:translateY(-3px); box-shadow:var(--drop); border-color:var(--hairline-strong)}
+/* 카드마다 다른 파스텔 톤을 --tint 로 받아, 배경 워시와 도형 면색에 함께 쓴다 */
+.tint-mint    {--tint:var(--g-mint)}
+.tint-peach   {--tint:var(--g-peach)}
+.tint-lavender{--tint:var(--g-lavender)}
+.tint-sky     {--tint:var(--g-sky)}
+.tint-rose    {--tint:var(--g-rose)}
 .work-art{
   position:relative; overflow:hidden; aspect-ratio:16/9;
-  background:var(--canvas-soft); border-bottom:1px solid var(--hairline);
-  display:grid; place-items:center; color:var(--ink);
+  border-bottom:1px solid var(--hairline);
+  display:grid; place-items:end stretch; color:var(--ink);
+  background:
+    linear-gradient(165deg,
+      color-mix(in srgb, var(--tint) 34%, var(--canvas-soft)) 0%,
+      color-mix(in srgb, var(--tint) 10%, var(--canvas-soft)) 58%,
+      var(--canvas-soft) 100%);
 }
-.work-art .orb{width:320px; height:320px; top:-120px; right:-90px; opacity:.65}
-.work-art svg{position:relative; z-index:1; width:82%; height:auto}
-.work-art img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:1}
+html[data-theme="dark"] .work-art{
+  background:
+    linear-gradient(165deg,
+      color-mix(in srgb, var(--tint) 20%, var(--canvas-soft)) 0%,
+      var(--canvas-soft) 70%);
+}
+.work-art svg{
+  position:relative; z-index:1; width:100%; height:88%;
+  align-self:end; display:block;
+}
+/* 논문 도표는 잘리면 안 되므로 cover 가 아니라 contain */
+.work-art img{
+  position:absolute; inset:0; z-index:1;
+  width:100%; height:100%; object-fit:contain; object-position:center;
+}
+/* 밝은 배경의 도표가 다크 모드에서 흰 덩어리로 뜨지 않도록 판을 밝게 유지 */
+html[data-theme="dark"] .work-art.has-image{background:#f4f3f1}
 .work-copy{padding:var(--s-lg) var(--s-xl) var(--s-xl); display:flex; flex-direction:column; flex:1}
 .work-copy .idx{font:600 12px/1.4 var(--sans); letter-spacing:.96px; color:var(--muted-soft)}
 .work-copy h3{margin:var(--s-xs) 0 var(--s-sm); max-width:22ch}

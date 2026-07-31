@@ -9,11 +9,15 @@ index.html              뼈대와 섹션 순서만 (거의 고칠 일 없음)
 assets/data.js          ★ 내용 — 여기만 고치면 됩니다
 assets/style.css        디자인 (색·간격은 맨 위 :root 토큰)
 assets/app.js           data.js 를 화면에 그리는 코드 + 카드 일러스트 SVG
-figs/profile.jpg          프로필 원본 (보관용)
+favicon.ico / favicon-32.png / apple-touch-icon.png   주소창·홈화면 아이콘
 figs/profile-web.jpg      웹용 프로필 (900×1092, 73 KB)
-figs/iise2025.jpg         발표 사진 원본 (보관용, 4032×3024, 2.2 MB)
-figs/informs2025-web.jpg  웹용 배너 — 회전·16:9 크롭·압축 (2000×1125, 176 KB)
-dev-server.js           로컬 미리보기 서버
+figs/informs2025-web.jpg  히어로 배너 (2000×1125, 176 KB)
+figs/work/*.webp          Selected work 카드 도표 6장 (각 60~120 KB)
+figs/work/original/       도표 원본 PNG (git 제외)
+figs/profile.jpg          프로필 원본 (보관용)
+figs/iise2025.jpg         발표 사진 원본 (보관용, 2.2 MB)
+dev-server.js             로컬 미리보기 서버
+optimize-figs.py          figs/work/ 그림 일괄 축소·압축
 ```
 
 ## 로컬에서 실시간으로 보기
@@ -66,6 +70,15 @@ Remote-SSH로 접속 중이라면 VS Code 하단 **포트(PORTS)** 탭에서 `51
 1. `figs/logos/` 폴더를 만들고 SVG 또는 PNG 를 넣습니다 (배경 투명, 높이 100px 이상 권장).
 2. `data.js` 의 해당 항목에 `logo: 'figs/logos/kaist.svg'` 를 적습니다.
 3. 흑백으로 표시되고 마우스를 올리면 원래 색으로 돌아옵니다.
+
+### Selected work 도표를 교체할 때
+
+1. **1600 × 900 (16:9)** 로 만듭니다. 다른 비율이면 여백이 생깁니다.
+2. 선은 굵게 — 카드에서 562px로 2.85배 축소되므로 **10px 이상**, 글자는 **34px 이상**이어야 읽힙니다.
+3. `figs/work/` 에 넣고 `python3 optimize-figs.py` 실행 (WebP 변환 시 1.3MB → 60KB 수준).
+4. `data.js` 의 해당 프로젝트 `image` 경로를 맞춥니다.
+
+파일이 없거나 로드에 실패하면 내장 SVG 일러스트로 자동 대체되므로 중간에 깨지지 않습니다.
 
 ### 사진을 새로 넣을 때
 

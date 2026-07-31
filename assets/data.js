@@ -86,6 +86,9 @@ window.SITE = {
     { name: 'KAIST',                                         logo: '', url: '' }
   ],
 
+  // Heading above the Selected work cards
+  workTitle: 'Six problems where the clock is not on a grid.',
+
   /* ── 4. Selected work ───────────────────────────────────────────────────
    *  orb : 'mint' | 'peach' | 'lavender' | 'sky' | 'rose'   atmospheric tint
    *  art : 'anomaly' | 'irregular' | 'survival' | 'dosing' | 'forecast'
@@ -99,7 +102,7 @@ window.SITE = {
       tags:  ['Streaming', 'Physics-informed', 'Astronomy'],
       orb:   'sky',
       art:   'anomaly',
-      image: ''
+      image: 'figs/work/anomaly-quasar.webp'
     },
     {
       title: 'Classifying irregular astronomical light curves',
@@ -107,7 +110,7 @@ window.SITE = {
       tags:  ['Neural SDE', 'Irregular sampling', 'Classification'],
       orb:   'lavender',
       art:   'irregular',
-      image: ''
+      image: 'figs/work/irregular-lightcurves.webp'
     },
     {
       title: 'Longitudinal survival under competing risks',
@@ -115,7 +118,7 @@ window.SITE = {
       tags:  ['Survival analysis', 'Competing risks', 'Clinical'],
       orb:   'mint',
       art:   'survival',
-      image: ''
+      image: 'figs/work/survival-competing-risks.webp'
     },
     {
       title: 'Time series foundation models',
@@ -123,7 +126,7 @@ window.SITE = {
       tags:  ['Foundation model', 'Pre-training', 'Transfer'],
       orb:   'rose',
       art:   'foundation',
-      image: ''
+      image: 'figs/work/foundation-tsfm.webp'
     },
     {
       title: 'Remaining useful life prediction',
@@ -131,7 +134,7 @@ window.SITE = {
       tags:  ['Prognostics', 'RUL', 'Industrial'],
       orb:   'sky',
       art:   'rul',
-      image: ''
+      image: 'figs/work/rul-prognostics.webp'
     },
     {
       title: 'Personalized thyroid hormone dosing',
@@ -139,7 +142,7 @@ window.SITE = {
       tags:  ['Healthcare', 'Recommendation', 'Deep survival'],
       orb:   'peach',
       art:   'dosing',
-      image: ''
+      image: 'figs/work/dosing-thyroid.webp'
     }
   ],
 
@@ -155,7 +158,7 @@ window.SITE = {
         year:    '2025',
         title:   'Modeling irregular astronomical time series with neural stochastic delay differential equations',
         authors: 'Oh, Y.; Kam, S.; Lim, D.; Kim, S.',
-        venue:   'CIKM 2025',
+        venue:   'CIKM',
         links:   [
           { label: 'ACM DL', href: 'https://dl.acm.org/doi/10.1145/3746252.3760805' },
           { label: 'arXiv',  href: 'https://arxiv.org/abs/2508.17521' }
@@ -165,7 +168,7 @@ window.SITE = {
         year:    '2025',
         title:   'Comprehensive review of neural differential equations for time series analysis',
         authors: 'Oh, Y.; Kam, S.; Lee, J.; Lim, D.; Kim, S.; Bui, A.',
-        venue:   'IJCAI 2025',
+        venue:   'IJCAI',
         kind:    'Survey Track',
         links:   [
           { label: 'IJCAI', href: 'https://www.ijcai.org/proceedings/2025/1179' },
@@ -174,18 +177,40 @@ window.SITE = {
       }
     ],
 
+    // 심사 중 — 연도 없이 표시됩니다
+    underReview: [
+      {
+        year:    '',
+        title:   'ASTRA: Unsupervised fault localization via attention shift in time-series using iTransformer',
+        authors: 'Kam, S.; Kang, T.; Kim, S.',
+        venue:   'Under review'
+      },
+      {
+        year:    '',
+        title:   'EU-Surv: Event uncertainty-aware deep dynamic survival modeling for personalized risk prediction under competing risks',
+        authors: 'Kam, S.; Shin, K.; Yoo, W.; Kim, S.',
+        venue:   'Under review'
+      },
+      {
+        year:    '',
+        title:   'Machine learning method to detect changing states in quasar light curves. I. Online analysis of single-band light curves for stochastic changing states',
+        authors: 'Kam, S.; Shin, M.; Yoo, J.; Kim, S.',
+        venue:   'Under review'
+      }
+    ],
+
     workshop: [
       {
         year:    '2024',
         title:   'Neural Langevin-type stochastic differential equations for astronomical time series classification under irregular observations',
         authors: 'Oh, Y.; Kam, S.; Lim, D.; Kim, S.',
-        venue:   'ICLR 2024 Workshop'
+        venue:   'ICLR Workshop'
       },
       {
         year:    '2024',
         title:   'Enhancing astronomical time series classification with neural stochastic differential equations under irregular observations',
         authors: 'Oh, Y.; Kam, S.; Lim, D.; Kim, S.',
-        venue:   'AAAI 2024 Workshop',
+        venue:   'AAAI Workshop',
         links:   [{ label: 'Workshop', href: 'https://sites.google.com/vt.edu/kgml-bridge-aaai-24/#h.8bxu7wv3ha6t' }]
       }
     ]
@@ -197,10 +222,36 @@ window.SITE = {
 
   talks: [
     {
+      year:    '2026',
+      title:   'Deep learning framework for personalized antithyroid dose recommendation using dual survival models',
+      authors: 'Kam, S.; Shin, K.; Yoo, W.; Kim, S.',
+      venue:   'IISE Annual Conference & Expo',
+      kind:    'Oral'
+    },
+    {
       year:    '2025',
       title:   'Detecting temporal state changes in astronomical time series data using neural differential equations',
       authors: 'Kam, S.; Oh, Y.; Shin, M.; Kim, S.',
       venue:   'INFORMS Annual Meeting',
+      kind:    'Oral'
+    },
+    {
+      year:    '2025',
+      title:   'Unsupervised root-cause localization via feature-level attention shifts in iTransformer',
+      authors: 'Kam, S.; Kang, T.; Kim, S.',
+      venue:   'KIIE Fall Conference'
+    },
+    {
+      year:    '2025',
+      title:   'Personalized survival modeling with event layer in deep learning-based competing risk analysis',
+      authors: 'Kam, S.; Shin, K.; Yoo, W.; Kim, S.',
+      venue:   'KIIE Spring Conference'
+    },
+    {
+      year:    '2024',
+      title:   'Optimal and personalized dose determination for patients with thyroid hormone disorders using deep learning-based survival analysis',
+      authors: 'Kam, S.; Cho, J.; Shin, K.; Moon, J.; Kim, S.',
+      venue:   'IISE Annual Conference & Expo',
       kind:    'Oral'
     },
     {
@@ -212,38 +263,31 @@ window.SITE = {
       links:   [{ label: 'Workshop', href: 'https://sites.google.com/view/data-science-2024' }]
     },
     {
-      year:    '2025',
-      title:   'Optimal and personalized initial dose determination for patients with thyroid hormone disorders using deep learning-based survival analysis',
-      authors: 'Kam, S.; Cho, J.; Shin, K.; Moon, J.; Kim, S.',
-      venue:   'IISE Annual Conference',
-      kind:    'Oral'
-    },
-    {
       year:    '2024',
       title:   'Addressing spatial gaps in XCO2 monitoring: a machine learning approach for South Korea',
       authors: 'Cho, H.; Kam, S.; Jeon, B.; Lee, K.; Kim, S.',
-      venue:   'KIIE',
+      venue:   'KIIE Fall Conference',
       links:   [{ label: 'Record', href: 'https://scholarworks.unist.ac.kr/handle/201301/86014' }]
     },
     {
       year:    '2024',
       title:   'Assessing user retention of connected home appliances: a survival analysis',
       authors: 'Cho, H.; Kam, S.; Hur, C.; Kim, S.',
-      venue:   'KIIE',
+      venue:   'KIIE Spring Conference',
       links:   [{ label: 'Record', href: 'https://scholarworks.unist.ac.kr/handle/201301/82924' }]
     },
     {
       year:    '2023',
       title:   'Optimal and personalized dose determination for patients with thyroid hormone disorders using deep learning-based survival analysis',
       authors: 'Kam, S.; Cho, J.; Shin, K.; Moon, J.; Kim, S.',
-      venue:   'KIIE',
+      venue:   'KIIE Fall Conference',
       links:   [{ label: 'DBpia', href: 'https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11609748' }]
     },
     {
       year:    '2023',
       title:   'Real-time detection of changing-state active galactic nuclei using a deep learning approach',
       authors: 'Kam, S.; Yoo, J.; Shin, M.; Kim, S.',
-      venue:   'KIIE',
+      venue:   'KIIE Spring Conference',
       links:   [{ label: 'Record', href: 'https://scholarworks.unist.ac.kr/handle/201301/74710' }]
     }
   ],
@@ -296,6 +340,11 @@ window.SITE = {
   ],
 
   awards: [
+    {
+      year:  '2026',
+      title: 'Finalist, IISE QCRE Data Challenge Competition',
+      org:   'Team: Yoo, J.; Lee, Y.; Yu, D.; Kam, S.'
+    },
     { year: '2021', title: "Dean's List", org: 'College of Engineering, Ajou University' },
     { year: '2020', title: "Dean's List", org: 'College of Engineering, Ajou University' }
   ],

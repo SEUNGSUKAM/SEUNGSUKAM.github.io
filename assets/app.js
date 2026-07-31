@@ -33,7 +33,8 @@
   /** Newest first. Lets you paste new entries anywhere in data.js. */
   function byYear(list, key) {
     return (list || []).slice().sort(function (a, b) {
-      return parseInt(b[key || 'year'], 10) - parseInt(a[key || 'year'], 10);
+      // 연도가 비어 있으면(심사 중 등) 원래 순서를 유지한다
+      return (parseInt(b[key || 'year'], 10) || 0) - (parseInt(a[key || 'year'], 10) || 0);
     });
   }
 
@@ -45,89 +46,97 @@
            inner + '</svg>';
   }
   var ART = {
-    // an ordinary light curve with one flagged excursion
+    // ordinary light curve + one flagged excursion
     anomaly: svg(
-      '<path d="M0 132h400" stroke="currentColor" stroke-opacity=".12"/>' +
-      '<path d="M4 118 22 113 40 121 58 109 76 116 94 106 112 114 130 108 148 116 166 110 184 118 202 108' +
-      ' 220 114 238 52 252 66 266 102 284 110 302 104 320 112 338 106 356 114 374 108 396 112"' +
-      ' stroke="currentColor" stroke-opacity=".6" stroke-width="1.6" stroke-linejoin="round"/>' +
-      '<path d="M238 66v58" stroke="currentColor" stroke-opacity=".28" stroke-width="1" stroke-dasharray="3 4"/>' +
-      '<circle cx="238" cy="52" r="17" stroke="currentColor" stroke-opacity=".9" stroke-width="1.4"/>' +
-      '<circle cx="238" cy="52" r="3.4" fill="currentColor"/>' +
-      '<g fill="currentColor" fill-opacity=".35">' +
-        '<circle cx="94" cy="106" r="2.2"/><circle cx="166" cy="110" r="2.2"/>' +
-        '<circle cx="302" cy="104" r="2.2"/><circle cx="374" cy="108" r="2.2"/></g>'
+      '<g stroke="currentColor" stroke-opacity=".08"><path d="M0 60h400M0 108h400"/></g>' +
+      '<path d="M0 118 20 112 40 122 60 104 80 116 100 100 120 112 140 102 160 114 180 104 200 116' +
+      ' 220 106 242 36 262 60 280 104 300 112 320 102 340 114 360 104 380 112 400 106' +
+      ' L400 180 L0 180 Z" fill="var(--tint)" fill-opacity=".5"/>' +
+      '<path d="M0 118 20 112 40 122 60 104 80 116 100 100 120 112 140 102 160 114 180 104 200 116' +
+      ' 220 106 242 36 262 60 280 104 300 112 320 102 340 114 360 104 380 112 400 106"' +
+      ' stroke="currentColor" stroke-opacity=".85" stroke-width="2.4" stroke-linejoin="round"/>' +
+      '<path d="M242 58v100" stroke="currentColor" stroke-opacity=".35" stroke-width="1.4" stroke-dasharray="4 5"/>' +
+      '<circle cx="242" cy="36" r="21" stroke="currentColor" stroke-width="2.4"/>' +
+      '<circle cx="242" cy="36" r="5" fill="currentColor"/>'
     ),
     // observations that land whenever they land
     irregular: svg(
-      '<path d="M0 146h400" stroke="currentColor" stroke-opacity=".18"/>' +
-      '<g stroke="currentColor" stroke-opacity=".45" stroke-width="1.4">' +
-        '<path d="M18 140v12M32 140v12M40 140v12M66 140v12M104 140v12M118 140v12' +
-        'M126 140v12M168 140v12M222 140v12M234 140v12M270 140v12M308 140v12M326 140v12M380 140v12"/></g>' +
-      '<path d="M8 96C60 40 96 116 152 84s84-58 132-14 62 46 108 26"' +
-      ' stroke="currentColor" stroke-opacity=".55" stroke-width="1.6" stroke-linecap="round"/>' +
-      '<g stroke="currentColor" stroke-opacity=".2" stroke-width="1" stroke-dasharray="2 4">' +
-        '<path d="M32 78v62M104 96v44M168 82v58M234 58v82M308 62v78"/></g>' +
+      '<path d="M0 92C56 34 96 112 156 78s86-56 132-12 60 44 112 22 L400 180 L0 180 Z"' +
+      ' fill="var(--tint)" fill-opacity=".5"/>' +
+      '<path d="M0 92C56 34 96 112 156 78s86-56 132-12 60 44 112 22"' +
+      ' stroke="currentColor" stroke-opacity=".85" stroke-width="2.4" stroke-linecap="round"/>' +
+      '<path d="M0 152h400" stroke="currentColor" stroke-opacity=".3" stroke-width="1.6"/>' +
+      '<g stroke="currentColor" stroke-opacity=".55" stroke-width="2">' +
+        '<path d="M22 146v12M38 146v12M46 146v12M74 146v12M112 146v12M126 146v12M134 146v12' +
+        'M176 146v12M228 146v12M240 146v12M276 146v12M312 146v12M330 146v12M382 146v12"/></g>' +
+      '<g stroke="currentColor" stroke-opacity=".28" stroke-width="1.2" stroke-dasharray="3 5">' +
+        '<path d="M38 70v82M112 90v62M176 74v78M240 50v102M312 56v96"/></g>' +
       '<g fill="currentColor">' +
-        '<circle cx="32" cy="78" r="3.2"/><circle cx="104" cy="96" r="3.2"/><circle cx="168" cy="82" r="3.2"/>' +
-        '<circle cx="234" cy="58" r="3.2"/><circle cx="308" cy="62" r="3.2"/></g>'
+        '<circle cx="38" cy="70" r="4.5"/><circle cx="112" cy="90" r="4.5"/><circle cx="176" cy="74" r="4.5"/>' +
+        '<circle cx="240" cy="50" r="4.5"/><circle cx="312" cy="56" r="4.5"/></g>'
     ),
     // competing risks pulling one cohort apart
     survival: svg(
-      '<path d="M0 150h400M12 20v130" stroke="currentColor" stroke-opacity=".14"/>' +
-      '<path d="M12 34h58v26h52v28h58v18h72v20h58v14h78"' +
-      ' stroke="currentColor" stroke-opacity=".75" stroke-width="1.8" stroke-linejoin="round"/>' +
-      '<path d="M12 34h38v40h54v26h56v26h68v20h62v12h88"' +
-      ' stroke="currentColor" stroke-opacity=".34" stroke-width="1.6" stroke-dasharray="5 4" stroke-linejoin="round"/>' +
-      '<g fill="currentColor" fill-opacity=".55">' +
-        '<circle cx="70" cy="60" r="2.6"/><circle cx="122" cy="88" r="2.6"/>' +
-        '<circle cx="180" cy="106" r="2.6"/><circle cx="252" cy="126" r="2.6"/></g>'
+      '<path d="M0 26h62v28h56v30h60v22h74v22h60v16h88 L400 180 L0 180 Z"' +
+      ' fill="var(--tint)" fill-opacity=".5"/>' +
+      '<path d="M0 26h62v28h56v30h60v22h74v22h60v16h88"' +
+      ' stroke="currentColor" stroke-opacity=".85" stroke-width="2.6" stroke-linejoin="round"/>' +
+      '<path d="M0 26h40v46h58v30h60v28h72v22h66v14h104"' +
+      ' stroke="currentColor" stroke-opacity=".38" stroke-width="2" stroke-dasharray="6 5" stroke-linejoin="round"/>' +
+      '<path d="M0 158h400" stroke="currentColor" stroke-opacity=".25" stroke-width="1.6"/>' +
+      '<g stroke="currentColor" stroke-opacity=".7" stroke-width="2">' +
+        '<path d="M90 48v12M170 78v12M262 100v12M330 122v12"/></g>'
     ),
-    // dose–response densities with a chosen starting point
+    // dose-response densities with a chosen starting point
     dosing: svg(
-      '<path d="M0 150h400" stroke="currentColor" stroke-opacity=".14"/>' +
-      '<path d="M20 150c46 0 34-84 78-84s34 84 78 84" stroke="currentColor" stroke-opacity=".28" stroke-width="1.5"/>' +
-      '<path d="M104 150c46 0 34-104 78-104s34 104 78 104" stroke="currentColor" stroke-opacity=".8" stroke-width="1.8"/>' +
-      '<path d="M186 150c46 0 34-70 78-70s34 70 78 70" stroke="currentColor" stroke-opacity=".28" stroke-width="1.5"/>' +
-      '<path d="M182 46v104" stroke="currentColor" stroke-opacity=".35" stroke-width="1" stroke-dasharray="3 4"/>' +
-      '<circle cx="182" cy="46" r="4" fill="currentColor"/>'
+      '<path d="M14 180c50 0 36-102 84-102s34 102 84 102z" fill="currentColor" fill-opacity=".08"/>' +
+      '<path d="M14 180c50 0 36-102 84-102s34 102 84 102" stroke="currentColor" stroke-opacity=".35" stroke-width="2"/>' +
+      '<path d="M218 180c50 0 36-88 84-88s34 88 84 88z" fill="currentColor" fill-opacity=".08"/>' +
+      '<path d="M218 180c50 0 36-88 84-88s34 88 84 88" stroke="currentColor" stroke-opacity=".35" stroke-width="2"/>' +
+      '<path d="M116 180c50 0 36-148 84-148s34 148 84 148z" fill="var(--tint)" fill-opacity=".55"/>' +
+      '<path d="M116 180c50 0 36-148 84-148s34 148 84 148" stroke="currentColor" stroke-opacity=".85" stroke-width="2.6"/>' +
+      '<path d="M200 32v148" stroke="currentColor" stroke-opacity=".4" stroke-width="1.4" stroke-dasharray="4 5"/>' +
+      '<circle cx="200" cy="32" r="6" fill="currentColor"/>' +
+      '<path d="M0 174h400" stroke="currentColor" stroke-opacity=".25" stroke-width="1.6"/>'
     ),
-    // many heterogeneous series pre-trained into one backbone
+    // heterogeneous series pre-trained into one backbone
     foundation: svg(
-      '<g stroke="currentColor" stroke-opacity=".38" stroke-width="1.4" stroke-linejoin="round">' +
-        '<path d="M6 30 30 22 54 34 78 26 102 32"/>' +
-        '<path d="M6 70 30 62 54 76 78 58 102 68"/>' +
-        '<path d="M6 110 30 118 54 100 78 112 102 104"/>' +
-        '<path d="M6 150 30 142 54 152 78 138 102 146"/></g>' +
-      '<g stroke="currentColor" stroke-opacity=".22" stroke-width="1">' +
-        '<path d="M104 32 138 74M104 68 138 82M104 104 138 96M104 146 138 106"/></g>' +
-      '<rect x="140" y="58" width="62" height="64" rx="10" stroke="currentColor" stroke-opacity=".85" stroke-width="1.6"/>' +
-      '<g fill="currentColor" fill-opacity=".5">' +
-        '<circle cx="157" cy="78" r="2.4"/><circle cx="171" cy="90" r="2.4"/><circle cx="185" cy="78" r="2.4"/>' +
-        '<circle cx="164" cy="104" r="2.4"/><circle cx="178" cy="104" r="2.4"/></g>' +
-      '<path d="M204 90h34" stroke="currentColor" stroke-opacity=".3" stroke-width="1"/>' +
-      '<path d="M240 90 268 66 296 96 324 54 352 74 392 44"' +
-      ' stroke="currentColor" stroke-opacity=".75" stroke-width="1.7" stroke-linejoin="round"/>' +
-      '<path d="M324 54c26 4 44-2 68-14" stroke="currentColor" stroke-opacity=".3" stroke-width="1.4" stroke-dasharray="5 4"/>'
+      '<g stroke="currentColor" stroke-opacity=".45" stroke-width="2" stroke-linejoin="round">' +
+        '<path d="M8 34 34 24 60 38 86 28 112 36"/>' +
+        '<path d="M8 78 34 68 60 84 86 62 112 74"/>' +
+        '<path d="M8 122 34 132 60 110 86 124 112 114"/>' +
+        '<path d="M8 164 34 154 60 166 86 150 112 158"/></g>' +
+      '<g stroke="currentColor" stroke-opacity=".25" stroke-width="1.4">' +
+        '<path d="M116 36 146 76M116 74 146 84M116 114 146 100M116 158 146 110"/></g>' +
+      '<rect x="148" y="52" width="76" height="76" rx="14" fill="var(--tint)" fill-opacity=".6"/>' +
+      '<rect x="148" y="52" width="76" height="76" rx="14" stroke="currentColor" stroke-width="2.4"/>' +
+      '<g fill="currentColor" fill-opacity=".55">' +
+        '<circle cx="170" cy="76" r="3.4"/><circle cx="186" cy="90" r="3.4"/><circle cx="202" cy="76" r="3.4"/>' +
+        '<circle cx="178" cy="106" r="3.4"/><circle cx="194" cy="106" r="3.4"/></g>' +
+      '<path d="M228 90h26" stroke="currentColor" stroke-opacity=".3" stroke-width="1.6"/>' +
+      '<path d="M256 92 288 62 320 96 352 48 400 70"' +
+      ' stroke="currentColor" stroke-opacity=".85" stroke-width="2.6" stroke-linejoin="round"/>' +
+      '<path d="M352 48c22 6 34 2 48-8" stroke="currentColor" stroke-opacity=".35" stroke-width="2" stroke-dasharray="6 5"/>'
     ),
     // health degrading toward a failure threshold, with the life that remains
     rul: svg(
-      '<path d="M0 150h400" stroke="currentColor" stroke-opacity=".14"/>' +
-      '<path d="M0 126h400" stroke="currentColor" stroke-opacity=".3" stroke-width="1" stroke-dasharray="4 4"/>' +
-      '<path d="M10 34C90 40 150 62 210 92s70 30 96 34" stroke="currentColor" stroke-opacity=".8" stroke-width="1.8"/>' +
-      '<path d="M210 92c46 22 70 30 96 34" stroke="currentColor" stroke-opacity=".3" stroke-width="1.6" stroke-dasharray="5 4"/>' +
-      '<path d="M210 24v126" stroke="currentColor" stroke-opacity=".28" stroke-width="1"/>' +
-      '<circle cx="210" cy="92" r="4" fill="currentColor"/>' +
-      '<circle cx="306" cy="126" r="4" stroke="currentColor" stroke-opacity=".8" stroke-width="1.4"/>' +
-      '<g stroke="currentColor" stroke-opacity=".55" stroke-width="1.3">' +
-        '<path d="M214 44h88M214 44l7-4M214 44l7 4M302 44l-7-4M302 44l-7 4"/></g>'
+      '<rect x="214" y="0" width="106" height="180" fill="var(--tint)" fill-opacity=".55"/>' +
+      '<path d="M0 130h400" stroke="currentColor" stroke-opacity=".4" stroke-width="1.6" stroke-dasharray="6 5"/>' +
+      '<path d="M0 26C92 32 156 56 214 90" stroke="currentColor" stroke-opacity=".85" stroke-width="2.8"/>' +
+      '<path d="M214 90c48 22 74 32 106 40" stroke="currentColor" stroke-opacity=".4" stroke-width="2.4" stroke-dasharray="7 5"/>' +
+      '<path d="M214 8v164" stroke="currentColor" stroke-opacity=".45" stroke-width="1.6"/>' +
+      '<circle cx="214" cy="90" r="6" fill="currentColor"/>' +
+      '<circle cx="320" cy="130" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/>' +
+      '<g stroke="currentColor" stroke-opacity=".7" stroke-width="2">' +
+        '<path d="M220 44h94M220 44l9-6M220 44l9 6M314 44l-9-6M314 44l-9 6"/></g>' +
+      '<path d="M0 172h400" stroke="currentColor" stroke-opacity=".25" stroke-width="1.6"/>'
     ),
     // generic fallback
     forecast: svg(
-      '<path d="M0 140h400" stroke="currentColor" stroke-opacity=".14"/>' +
-      '<path d="M8 118 62 96 116 108 170 70 224 84 278 48 332 62 392 34"' +
-      ' stroke="currentColor" stroke-opacity=".7" stroke-width="1.7" stroke-linejoin="round"/>' +
-      '<path d="M278 48c34 6 62 0 114-22" stroke="currentColor" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="5 4"/>'
+      '<path d="M0 120 60 96 120 108 180 66 240 82 300 44 360 60 400 32 L400 160 L0 160 Z"' +
+      ' fill="var(--tint)" fill-opacity=".5"/>' +
+      '<path d="M0 120 60 96 120 108 180 66 240 82 300 44 360 60 400 32"' +
+      ' stroke="currentColor" stroke-opacity=".85" stroke-width="2.4" stroke-linejoin="round"/>'
     )
   };
 
@@ -148,7 +157,6 @@
     return '<a href="#' + n.id + '" data-nav="' + n.id + '">' + esc(n.label) + '</a>';
   }).join(''));
 
-  var primaryHref = L.scholar || ('mailto:' + P.email);
   set('navActions',
     '<a class="btn btn-outline btn-sm" href="mailto:' + esc(P.email) + '">Email</a>' +
     (L.scholar ? '<a class="btn btn-primary btn-sm" href="' + esc(L.scholar) + '"' + ext(L.scholar) + '>Google Scholar</a>' : '') +
@@ -240,17 +248,17 @@
     '<div class="container">' +
       '<div class="sec-head reveal">' +
         '<div><p class="eyebrow">Selected work</p>' +
-        '<h2 class="display-lg">Four problems where the clock is not on a grid.</h2></div>' +
+        '<h2 class="display-lg">' + esc(S.workTitle || 'Where the clock is not on a grid.') + '</h2></div>' +
       '</div>' +
       '<div class="work-grid">' + (S.work || []).map(function (w, i) {
+        // 이미지가 있으면 이미지, 없거나 로드에 실패하면 그려둔 일러스트
         var visual = w.image
-          ? '<img src="' + esc(w.image) + '" alt="' + esc(w.title) + '" loading="lazy" />'
+          ? '<img src="' + esc(w.image) + '" alt="' + esc(w.title) + '" loading="lazy"' +
+            ' data-art="' + esc(w.art || 'forecast') + '" />'
           : (ART[w.art] || ART.forecast);
         return '<article class="work-card reveal">' +
-                 '<div class="work-art">' +
-                   '<div class="orb orb-' + esc(w.orb || 'sky') + '"></div>' +
-                   visual +
-                 '</div>' +
+                 '<div class="work-art tint-' + esc(w.orb || 'sky') +
+                   (w.image ? ' has-image' : '') + '">' + visual + '</div>' +
                  '<div class="work-copy">' +
                    '<span class="idx">' + String(i + 1).padStart(2, '0') + '</span>' +
                    '<h3 class="display-sm">' + esc(w.title) + '</h3>' +
@@ -262,6 +270,15 @@
                '</article>';
       }).join('') + '</div>' +
     '</div>');
+
+  /* 이미지 파일이 아직 없으면 조용히 기존 일러스트로 되돌린다 */
+  document.querySelectorAll('.work-art img[data-art]').forEach(function (img) {
+    img.addEventListener('error', function () {
+      var panel = img.parentNode;
+      panel.classList.remove('has-image');
+      panel.innerHTML = ART[img.dataset.art] || ART.forecast;
+    });
+  });
 
   /* ------------------------------------------------------------ entries -- */
   function entry(o) {
@@ -293,10 +310,12 @@
   function emptyRow(msg) { return '<p class="empty">' + esc(msg) + '</p>'; }
 
   /* ------------------------------------------------------ publications --- */
+  /* 논문 섹션에 표시되는 순서. 순서를 바꾸려면 이 배열의 줄 순서만 바꾸면 된다. */
   var PUB_GROUPS = [
-    { key: 'journal',    label: 'Journal' },
-    { key: 'conference', label: 'Conference' },
-    { key: 'workshop',   label: 'Workshop' }
+    { key: 'underReview', label: 'Under review' },
+    { key: 'journal',     label: 'Journal' },
+    { key: 'conference',  label: 'Conference' },
+    { key: 'workshop',    label: 'Workshop' }
   ];
   var pubTotal = 0;
   var papersBody = '';
