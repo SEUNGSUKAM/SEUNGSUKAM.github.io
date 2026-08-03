@@ -414,18 +414,17 @@ html[data-theme="dark"] .work-art.has-image{background:#f4f3f1}
 .entry{
   display:grid; grid-template-columns:72px minmax(0,1fr) auto;
   gap:var(--s-lg); align-items:start;
-  padding:var(--s-lg); margin:0 calc(-1 * var(--s-lg));
-  border-radius:var(--r-sm);
+  padding:var(--s-lg) 0;
   border-bottom:1px solid var(--hairline);
-  transition:opacity .2s ease, background-color .25s ease;
+  transition:opacity .35s ease;
 }
 .entry:first-of-type{border-top:1px solid var(--hairline)}
 
-/* 목록 행은 은은한 배경 틴트 하나로만 반응한다 — 애니메이션이나
-   가상요소 없이 background-color 전환 하나뿐이라 커서를 빠르게
-   옮겨도 여러 행이 동시에 반응하는 문제가 생길 여지가 없다. */
-.entry:hover{background:color-mix(in srgb, var(--ink) 4%, transparent)}
-.entry:hover .yr{color:var(--body-strong)}
+/* 스포트라이트 — 한 행에 마우스를 올리면 같은 섹션의 나머지 행들이
+   옅어지고, 올린 행만 선명하게 남는다. 색이나 테두리, 그림자 없이
+   opacity 하나로만 대비를 만드는 방식이라 톤이 절제되어 있다. */
+.band:has(.entry:hover) .entry{opacity:.4}
+.band:has(.entry:hover) .entry:hover{opacity:1}
 .entry .yr{font:400 14px/1.6 var(--sans); color:var(--muted-soft); letter-spacing:.5px; transition:color .25s ease}
 .entry h4{font:500 17px/1.45 var(--sans); color:var(--ink); letter-spacing:.1px; margin-bottom:6px}
 .entry .authors{font:400 14px/1.5 var(--sans); color:var(--muted)}
