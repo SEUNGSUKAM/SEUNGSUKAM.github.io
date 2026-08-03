@@ -159,8 +159,16 @@ html[data-theme="dark"] .orb{opacity:.28; filter:blur(80px)}
   padding:4px 10px; border-radius:var(--r-pill);
 }
 .tag{
-  display:inline-block; border:1px solid var(--hairline-strong); color:var(--muted);
+  display:inline-block; border:1.5px solid var(--hairline-strong); color:var(--muted);
   font:400 13px/1.4 var(--sans); padding:4px 12px; border-radius:var(--r-pill);
+  transition:border-color .18s ease, color .18s ease;
+}
+/* 태그도 카드와 같은 규칙: 자기 자신 위에 마우스가 있을 때만 테두리가
+   프로젝트 색으로 밝아진다. */
+.work-card .tag:hover,
+.interest-list .tag:hover{
+  border-color:var(--tint, var(--body-strong));
+  color:var(--ink);
 }
 
 /* ------------------------------------------------------------ nav ------- */
@@ -308,11 +316,17 @@ html[data-theme="dark"] .orb{opacity:.28; filter:blur(80px)}
 .work-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--s-lg)}
 .work-card{
   position:relative; overflow:hidden; isolation:isolate;
-  background:var(--surface-card); border:1px solid var(--hairline);
+  background:var(--surface-card); border:1.5px solid var(--hairline);
   border-radius:var(--r-xl); display:flex; flex-direction:column;
-  transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  transition:transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease, border-color .3s ease;
 }
-.work-card:hover{transform:translateY(-3px); box-shadow:var(--drop); border-color:var(--hairline-strong)}
+/* 카드 전체(이미지 포함) 테두리가 프로젝트 색으로 밝아지고 살짝 떠오른다 —
+   포트폴리오 카드에서 가장 흔히 쓰이는 호버 패턴. */
+.work-card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--drop);
+  border-color:var(--tint);
+}
 /* 카드마다 다른 파스텔 톤을 --tint 로 받아, 배경 워시와 도형 면색에 함께 쓴다 */
 .tint-mint    {--tint:var(--g-mint)}
 .tint-peach   {--tint:var(--g-peach)}
@@ -320,7 +334,7 @@ html[data-theme="dark"] .orb{opacity:.28; filter:blur(80px)}
 .tint-sky     {--tint:var(--g-sky)}
 .tint-rose    {--tint:var(--g-rose)}
 .work-art{
-  position:relative; overflow:hidden; aspect-ratio:16/9;
+  position:relative; z-index:3; overflow:hidden; aspect-ratio:16/9;
   border-bottom:1px solid var(--hairline);
   display:grid; place-items:end stretch; color:var(--ink);
   background:
@@ -346,7 +360,7 @@ html[data-theme="dark"] .work-art{
 }
 /* 밝은 배경의 도표가 다크 모드에서 흰 덩어리로 뜨지 않도록 판을 밝게 유지 */
 html[data-theme="dark"] .work-art.has-image{background:#f4f3f1}
-.work-copy{padding:var(--s-lg) var(--s-xl) var(--s-xl); display:flex; flex-direction:column; flex:1}
+.work-copy{position:relative; z-index:3; padding:var(--s-lg) var(--s-xl) var(--s-xl); display:flex; flex-direction:column; flex:1}
 .work-copy .idx{font:600 12px/1.4 var(--sans); letter-spacing:.96px; color:var(--muted-soft)}
 .work-copy h3{margin:var(--s-xs) 0 var(--s-sm); max-width:22ch}
 .work-copy p{color:var(--body); max-width:46ch}

@@ -256,9 +256,8 @@
           ? '<img src="' + esc(w.image) + '" alt="' + esc(w.title) + '" loading="lazy"' +
             ' data-art="' + esc(w.art || 'forecast') + '" />'
           : (ART[w.art] || ART.forecast);
-        return '<article class="work-card reveal">' +
-                 '<div class="work-art tint-' + esc(w.orb || 'sky') +
-                   (w.image ? ' has-image' : '') + '">' + visual + '</div>' +
+        return '<article class="work-card reveal tint-' + esc(w.orb || 'sky') + '">' +
+                 '<div class="work-art' + (w.image ? ' has-image' : '') + '">' + visual + '</div>' +
                  '<div class="work-copy">' +
                    '<span class="idx">' + String(i + 1).padStart(2, '0') + '</span>' +
                    '<h3 class="display-sm">' + esc(w.title) + '</h3>' +
