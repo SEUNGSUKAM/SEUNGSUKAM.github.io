@@ -314,33 +314,41 @@ html[data-theme="dark"] .orb{opacity:.28; filter:blur(80px)}
 
 /* ------------------------------------------------------- work cards ----- */
 .work-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--s-lg)}
+/* 그라데이션이 "테두리 안쪽의 장식"이 아니라 진짜 테두리 자체가 되도록
+   background-clip 이중 레이어 기법을 쓴다. border 를 투명하게 두고,
+   배경을 두 겹으로 깐다 — 안쪽 레이어(padding-box)는 카드 색으로 속을
+   채우고, 바깥 레이어(border-box)는 테두리 자리에만 보이는 그라데이션.
+   이렇게 하면 카드를 감싸는 진짜 테두리 위치에 그라데이션이 정확히
+   맞아 들어간다 (안쪽에 따로 떠 있는 느낌이 없다). */
+@property --angle{
+  syntax:'<angle>'; inherits:false; initial-value:0deg;
+}
 .work-card{
+  --angle:0deg;
   position:relative; overflow:hidden; isolation:isolate;
-  background:var(--surface-card); border:1.5px solid var(--hairline);
-  border-radius:var(--r-xl); display:flex; flex-direction:column;
+  border:1.5px solid transparent; border-radius:var(--r-xl);
+  background:
+    linear-gradient(var(--surface-card), var(--surface-card)) padding-box,
+    linear-gradient(135deg, var(--hairline), var(--hairline)) border-box;
+  display:flex; flex-direction:column;
   transition:transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease;
 }
 .work-card:hover{transform:translateY(-4px); box-shadow:var(--drop)}
 
-/* 그라데이션 테두리. ::before 는 카드 전체(이미지+텍스트 한 덩어리)를
-   감싸는 대각선 그라데이션, ::after 는 그 위에 얹는 카드와 같은 색의
-   둥근 사각형(실제 테두리 두께만큼 안쪽) — 남는 테두리 자리에만 보인다.
-   끝까지 색이 옅어지지 않도록(투명으로 빠지지 않게) 밝은 톤→진한 톤으로
-   이어서, 테두리 전체 둘레에서 확실히 티가 나게 한다. */
-.work-card::before{
-  content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
-  border-radius:inherit;
-  background:linear-gradient(135deg,
-    color-mix(in srgb, var(--tint) 88%, white) 0%,
-    var(--tint) 45%,
-    color-mix(in srgb, var(--tint) 55%, var(--ink)) 100%);
-  opacity:0; transition:opacity .3s ease;
+/* 호버 시 테두리를 따라 색이 도는 효과. conic-gradient 는 원래
+   각도를 중심으로 색이 도는 모양이므로, 카드나 테두리 모양은 전혀
+   움직이지 않고 --angle 값만 0→360도로 바뀌면서 "빛이 테두리를
+   따라 이동"하는 것처럼 보인다. */
+.work-card:hover{
+  background:
+    linear-gradient(var(--surface-card), var(--surface-card)) padding-box,
+    conic-gradient(from var(--angle),
+      color-mix(in srgb, var(--tint) 70%, transparent),
+      color-mix(in srgb, var(--tint) 30%, transparent),
+      color-mix(in srgb, var(--tint) 70%, transparent)) border-box;
+  animation:border-spin 7s linear infinite;
 }
-.work-card::after{
-  content:""; position:absolute; inset:2px; z-index:2; pointer-events:none;
-  border-radius:calc(var(--r-xl) - 2px); background:var(--surface-card);
-}
-.work-card:hover::before{opacity:1}
+@keyframes border-spin{ to{ --angle:360deg } }
 /* 카드마다 다른 파스텔 톤을 --tint 로 받아, 배경 워시와 도형 면색에 함께 쓴다 */
 .tint-mint    {--tint:var(--g-mint)}
 .tint-peach   {--tint:var(--g-peach)}
@@ -404,12 +412,34 @@ html[data-theme="dark"] .work-art.has-image{background:#f4f3f1}
 .sub-label b{font:400 13px/1 var(--sans); color:var(--muted-soft)}
 
 .entry{
+  --angle:0deg;
   display:grid; grid-template-columns:72px minmax(0,1fr) auto;
-  gap:var(--s-lg); align-items:start;
-  padding:var(--s-lg) 0; border-bottom:1px solid var(--hairline);
+  gap:var(--s-lg); align-items:start; position:relative; isolation:isolate;
+  padding:var(--s-lg); margin:0 calc(-1 * var(--s-lg));
+  border-radius:var(--r-sm);
+  border-bottom:1px solid var(--hairline);
   transition:opacity .2s ease;
 }
 .entry:first-of-type{border-top:1px solid var(--hairline)}
+.entry > *{position:relative; z-index:1}
+
+/* 목록 행은 텍스트 위주라 파스텔 색을 쓰지 않고, --ink 의 투명도만
+   돌려서(0%→더 진하게→0%) 아주 가느다란(1px) 테두리가 은은하게
+   테두리를 따라 도는 것처럼 보이게 한다. 카드보다 훨씬 절제된 버전. */
+.entry::before{
+  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  border-radius:var(--r-sm);
+  background:conic-gradient(from var(--angle),
+    transparent, color-mix(in srgb, var(--ink) 32%, transparent), transparent 55%);
+  opacity:0; transition:opacity .3s ease;
+}
+.entry::after{
+  content:""; position:absolute; inset:1px; z-index:0; pointer-events:none;
+  border-radius:calc(var(--r-sm) - 1px); background:var(--canvas);
+  opacity:0; transition:opacity .3s ease;
+}
+.entry:hover::before,.entry:hover::after{opacity:1}
+.entry:hover::before{animation:border-spin 6s linear infinite}
 .entry .yr{font:400 14px/1.6 var(--sans); color:var(--muted-soft); letter-spacing:.5px}
 .entry h4{font:500 17px/1.45 var(--sans); color:var(--ink); letter-spacing:.1px; margin-bottom:6px}
 .entry .authors{font:400 14px/1.5 var(--sans); color:var(--muted)}
@@ -545,5 +575,6 @@ html[data-theme="dark"] .work-art.has-image{background:#f4f3f1}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .reveal{opacity:1; transform:none; transition:none}
-  .work-card:hover{transform:none}
+  .work-card:hover{transform:none; animation:none}
+  .entry:hover::before{animation:none}
 }
