@@ -412,35 +412,21 @@ html[data-theme="dark"] .work-art.has-image{background:#f4f3f1}
 .sub-label b{font:400 13px/1 var(--sans); color:var(--muted-soft)}
 
 .entry{
-  --angle:0deg;
   display:grid; grid-template-columns:72px minmax(0,1fr) auto;
-  gap:var(--s-lg); align-items:start; position:relative; isolation:isolate;
+  gap:var(--s-lg); align-items:start;
   padding:var(--s-lg); margin:0 calc(-1 * var(--s-lg));
   border-radius:var(--r-sm);
   border-bottom:1px solid var(--hairline);
-  transition:opacity .2s ease;
+  transition:opacity .2s ease, background-color .25s ease;
 }
 .entry:first-of-type{border-top:1px solid var(--hairline)}
-.entry > *{position:relative; z-index:1}
 
-/* 목록 행은 텍스트 위주라 파스텔 색을 쓰지 않고, --ink 의 투명도만
-   돌려서(0%→더 진하게→0%) 아주 가느다란(1px) 테두리가 은은하게
-   테두리를 따라 도는 것처럼 보이게 한다. 카드보다 훨씬 절제된 버전. */
-.entry::before{
-  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-  border-radius:var(--r-sm);
-  background:conic-gradient(from var(--angle),
-    transparent, color-mix(in srgb, var(--ink) 32%, transparent), transparent 55%);
-  opacity:0; transition:opacity .3s ease;
-}
-.entry::after{
-  content:""; position:absolute; inset:1px; z-index:0; pointer-events:none;
-  border-radius:calc(var(--r-sm) - 1px); background:var(--canvas);
-  opacity:0; transition:opacity .3s ease;
-}
-.entry:hover::before,.entry:hover::after{opacity:1}
-.entry:hover::before{animation:border-spin 6s linear infinite}
-.entry .yr{font:400 14px/1.6 var(--sans); color:var(--muted-soft); letter-spacing:.5px}
+/* 목록 행은 은은한 배경 틴트 하나로만 반응한다 — 애니메이션이나
+   가상요소 없이 background-color 전환 하나뿐이라 커서를 빠르게
+   옮겨도 여러 행이 동시에 반응하는 문제가 생길 여지가 없다. */
+.entry:hover{background:color-mix(in srgb, var(--ink) 4%, transparent)}
+.entry:hover .yr{color:var(--body-strong)}
+.entry .yr{font:400 14px/1.6 var(--sans); color:var(--muted-soft); letter-spacing:.5px; transition:color .25s ease}
 .entry h4{font:500 17px/1.45 var(--sans); color:var(--ink); letter-spacing:.1px; margin-bottom:6px}
 .entry .authors{font:400 14px/1.5 var(--sans); color:var(--muted)}
 .entry .authors u{text-decoration:none; color:var(--ink); font-weight:500}
@@ -576,5 +562,4 @@ html[data-theme="dark"] .work-art.has-image{background:#f4f3f1}
   html{scroll-behavior:auto}
   .reveal{opacity:1; transform:none; transition:none}
   .work-card:hover{transform:none; animation:none}
-  .entry:hover::before{animation:none}
 }
